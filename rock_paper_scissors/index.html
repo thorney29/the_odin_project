@@ -48,6 +48,13 @@
 		color: red;
 		font-size: 1.1em;
 	} 
+	button {
+		background: black;
+		color:white;
+		padding: .825em;
+		margin:1% auto;
+	}
+	button:hover{background: green;}
 </style>
 </head>
 <body>
@@ -100,15 +107,24 @@
 		</div>
 	</div>
 	<script>
-		function updateWinner (yourPoints, computerPoints) {
+		function updateWinner () {
+			let yourPoints = document.getElementById("yourPoints").innerHTML;
+				yourPoints = Number(yourPoints);
+				let computerPoints = document.getElementById("computerPoints").innerHTML;
 				if(yourPoints == 5 ) {
-					document.getElementById("message").innerHTML = "YOU WIN!! WOOHOO!"
-				} else if(computerPoints == 5) {
-					document.getElementById("message").innerHTML = "Sorry. You lose. Play again?"
+					document.getElementById("message").innerHTML = 'YOU WIN!! WOOHOO! Play again? <br/><button onclick="reset();">YES</button>';
+				} else if(computerPoints > 4) {
+					document.getElementById("message").innerHTML = 'Sorry. You lose. Play again? <br/><button onclick="reset();">YES</button>';
 				}
 		}
-		
-		function getUserChoice () {
+		updateWinner(yourPoints, computerPoints);
+		function reset (yourPoints, computerPoints) {
+			document.getElementById("yourPoints").innerHTML = 0;
+			document.getElementById("computerPoints").innerHTML = 0;
+			document.getElementById("message").innerHTML = '';
+			document.getElementById("getResult").innerHTML = 'Let\'s do this!';
+		}
+		function getUserChoice (yourPoints, computerPoints) {
 			let playerSelection = '';
 			if (userChoice == "scissors") {
 				playerSelection = "scissors";
@@ -134,13 +150,13 @@
 					if(computerSelection == "scissors") {
 						// you win
 						document.getElementById("computerHand").innerHTML = '<i id="yourHand" class="fas fa-hand-scissors fa-flip-horizontal"></i>';
-						document.getElementById("getResult").innerHTML = "You win! Rock beats scissors.";
+						document.getElementById("getResult").innerHTML = "Yes! Rock beats scissors.";
 						document.getElementById("yourPoints").innerHTML = yourPoints + 1;
-						console.log(yourPoints);
+						
 					} else if (computerSelection == "paper") {
 						// you lose
 						document.getElementById("computerHand").innerHTML = '<i id="yourHand" class="fas fa-hand-paper fa-flip-horizontal"></i>';
-						document.getElementById("getResult").innerHTML = "You lose! Paper beats rock.";
+						document.getElementById("getResult").innerHTML = "Uh oh! Paper beats rock.";
 						document.getElementById("computerPoints").innerHTML = computerPoints + 1;
 					} else {
 						// tied
@@ -152,12 +168,12 @@
 					if(computerSelection == "rock") {
 						// you win
 						document.getElementById("computerHand").innerHTML = '<i id="yourHand" class="fas fa-hand-rock fa-flip-horizontal"></i>';
-						document.getElementById("getResult").innerHTML = "You win! Paper beats rock.";
+						document.getElementById("getResult").innerHTML = "Yes! Paper beats rock.";
 						document.getElementById("yourPoints").innerHTML = yourPoints + 1;
 					} else if (computerSelection == "scissors") {
 						// you lose
 						document.getElementById("computerHand").innerHTML = '<i id="yourHand" class="fas fa-hand-scissors fa-flip-horizontal"></i>';
-						document.getElementById("getResult").innerHTML = "You lose! Scissors beats paper.";
+						document.getElementById("getResult").innerHTML = "Uh oh! Scissors beats paper.";
 						document.getElementById("computerPoints").innerHTML = computerPoints + 1;
 					} else { 
 						// tied
@@ -169,12 +185,12 @@
 					if(computerSelection == "paper") {
 						// you win
 						document.getElementById("computerHand").innerHTML = '<i id="yourHand" class="fas fa-hand-paper fa-flip-horizontal"></i>';
-						document.getElementById("getResult").innerHTML = "You win! Scissors beats paper.";
+						document.getElementById("getResult").innerHTML = "Yes! Scissors beats paper.";
 						document.getElementById("yourPoints").innerHTML = yourPoints + 1;
 					} else if (computerSelection == "rock") {
 						// you lose
 						document.getElementById("computerHand").innerHTML = '<i id="yourHand" class="fas fa-hand-rock fa-flip-horizontal"></i>';
-						document.getElementById("getResult").innerHTML = "You lose! Rock beats scissors.";
+						document.getElementById("getResult").innerHTML = "Uh oh! Rock beats scissors.";
 						document.getElementById("computerPoints").innerHTML = computerPoints + 1;
 					} else {
 						// tied
