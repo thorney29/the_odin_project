@@ -1,0 +1,138 @@
+* {
+	margin:0;
+	padding:0;
+	box-sizing: border-box;
+	outline: none;
+}
+*:hover {
+	outline: none;
+}
+body {
+	width: 100%;
+	font-family: arial;
+}
+a:focus {
+  outline: none;
+}			
+nav {
+}
+nav ul,
+footer ul {
+	display:flex;
+	justify-content: space-between;
+	list-style: none;
+	width:96%;
+	margin:auto;
+}
+nav ul span,
+footer ul span {
+	display: flex;
+	/*justify-content: space-between;*/
+}
+nav ul span:first-of-type {
+	justify-content: flex-start;
+}
+nav ul span:last-of-type {
+	justify-content: flex-end;
+}
+nav ul span:first-of-type li:last-of-type {
+	margin:0 14%;
+}
+nav ul span:last-of-type li:nth-child(2n) {
+	margin: 0 14%;
+}
+nav ul span {margin-top:2%;}
+nav ul li a,
+footer ul li a {
+	font-size: 13.5px;
+	text-decoration: none;
+	color: #666;
+}
+.menu-grid-icon i{
+	font-size: 19px;
+	font-style: normal;
+}
+main {
+	height: 100%;
+}
+img {
+	display: block;
+	margin:11.5% auto 0;
+}
+.input-icons {
+    position: relative;
+} 
+.input-icons .fa-search { 
+  position: absolute;
+  top: 13px;
+  left: 30%;
+  font-size: 18px;
+  color:#ccc;
+}
+.menu-profile-image {
+	border-top: 2px solid red;
+	border-right: 2px solid blue;
+	
+	border-bottom: 2px solid green;
+	border-left: 2px solid orange;
+	/*border-image:   linear-gradient(to right, blue 25%, yellow 25%, yellow 50%,red 50%, red 75%, green 75%) 5;*/
+	padding: 2px;
+	height: 39px;
+	width: 39px;
+	border-radius: 50%;
+	margin: -9px 14% !important;
+}
+.menu-profile-image img {
+	width: 33px;
+	height: 33px;
+	border-radius: 50%;
+	padding: 1px;
+	margin: -1px;
+} 
+/*.menu-profile-image {
+	border: 1px solid blue;
+}*/
+input {
+	border-radius: 22px;
+	display: block;
+	margin:2% auto;
+	text-indent: 40px;
+	width: 43%;
+	height: 45px;
+	border: 1px solid #e1e0e0;
+	font-size: 15px;
+}
+input:hover {
+	box-shadow: -1px 1px 8px rgba(0,0,0,.123);
+}
+img.microphone {
+	position: absolute;
+	right: 29.35%;
+	bottom: 21%;
+	width: 25px;
+}
+.button-container {
+	display: flex;
+	justify-content: center;
+}
+button {
+	height: 40px;
+	margin: 1%;
+	background: #f5f5f5;
+	font-size: 15px;
+	color: #796d6d;
+	border: 1px solid #f5f5f5;
+	border-radius: 4px;
+	padding: .625em;
+}
+button:hover {
+	box-shadow: -1px 1px 2px rgba(0,0,0,.123);
+	color: black;
+}
+footer {
+	background: #f5f5f5;
+	margin:0;
+}
+footer ul li {
+	margin:10px 20px;
+}
