@@ -3,7 +3,139 @@
 <head>
   <meta charset="utf-8">
   <title>Rock Paper Scissors</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" integrity="sha384-v8BU367qNbs/aIZIxuivaU55N5GPF89WBerHoGA4QTcbUjYiLQtKdrfXnqAcXyTv" crossorigin="anonymous">
+<style>
+	.scissors,
+	.rock,
+	.paper,
+	.player {
+		font-size: 10em;
+		display: flex;
+		justify-content: space-around
+	}
+	.player {
+		font-size: 2em;
+	}
+	.scissors-container:nth-child(odd),
+	.rock-container:nth-child(odd),
+	.paper-container:nth-child(odd)  {
+		transform: rotate(90deg);
+	}
+	.scissors-container:nth-child(even),
+	.rock-container:nth-child(even),
+	.paper-container:nth-child(even) {
+		transform: rotate(270deg);
+	}
+	.user .fas:focus,
+	.user .fas:active {
+		color: red;
+		font-size: 1.1em;
+	} 
+</style>
 </head>
 <body>
+	<div  style="text-align: center;">
+		<h1>Let's play rock paper scissors. GAME ON!</h1>
+		<p id="getResult">
+		Who will win?
+		</p>
+	</div>
+	<div class="player">
+		<p>YOU</p>
+		<p>COMPUTER</p>
+	</div>
+	<div class="scissors">
+		<div onclick="userChoice = 'scissors'; game();" class="scissors-container user">
+			<i class="fas fa-hand-peace"></i>
+		</div>
+		<div class="scissors-container">
+			<i class="fas fa-hand-peace fa-flip-horizontal"></i>
+		</div>
+	</div>
+	<div class="rock">
+		<div onclick="userChoice = 'rock'; game();" class="rock-container user">
+			<i class="fas fa-hand-rock"></i>
+		</div>
+		<div class="rock-container">
+			<i class="fas fa-hand-rock fa-flip-horizontal"></i>
+		</div>
+	</div>
+	<div class="paper">
+		<div onclick="userChoice = 'paper'; game();" class="paper-container user">
+			<i class="fas fa-hand-paper"></i>
+		</div>
+		<div class="paper-container">
+			<i class="fas fa-hand-paper fa-flip-horizontal"></i>
+		</div>
+	</div>
+	<script>
+		function getUserChoice () {
+			let playerSelection = '';
+			if (userChoice == "scissors") {
+				playerSelection = "scissors";
+				return playerSelection;
+			} else if (userChoice == "rock") {
+				playerSelection = "rock";
+				return playerSelection;
+			} else {
+				playerSelection = "paper";
+				return playerSelection;
+			}
+		} 
+		function getResult (playerSelection, computerSelection, numberOfRounds) {
+				if (playerSelection == "rock") {
+					if(computerSelection == "scissors") {
+						document.getElementById("getResult").innerHTML = "You win! Rock beats scissors.";
+					} else if (computerSelection == "paper") {
+						document.getElementById("getResult").innerHTML = "You lose! Paper beats rock.";
+					} else {
+						document.getElementById("getResult").innerHTML = "It was a draw.";
+					}
+				} else if (playerSelection == "paper") {
+					if(computerSelection == "rock") {
+						document.getElementById("getResult").innerHTML = "You win! Paper beats rock.";
+					} else if (computerSelection == "scissors") {
+						document.getElementById("getResult").innerHTML = "You lose! Scissors beats paper.";
+					} else {
+						document.getElementById("getResult").innerHTML = "It was a draw.";
+					}
+				} else {
+					if(computerSelection == "paper") {
+						document.getElementById("getResult").innerHTML = "You win! Scissors beats paper.";
+					} else if (computerSelection == "rock") {
+						document.getElementById("getResult").innerHTML = "You win! Rock beats scissors.";
+					} else {
+						document.getElementById("getResult").innerHTML = "It was a draw.";
+					}
+				}
+		}
+
+		function computerPlay () {
+			let choiceArray = ["rock", "paper", "scissors"];
+			let randomNumber =Math.floor((Math.random() * 3) + 0);
+			let computerSelection = '';
+			computerSelection = choiceArray[randomNumber].toLowerCase();
+			console.log("computerSelection");
+			console.log(computerSelection);
+			return computerSelection;
+		}
+
+		function game () {
+				
+				// let numberOfRounds = prompt("How many rounds would you like to play", '0');
+				// numberOfRounds = parseInt(numberOfRounds);
+				// console.log(numberOfRounds);
+				// for (var i = 0; 6 > i; i++) {
+					// let playerSelection = prompt("Let's play rock paper scissors. GAME ON! Rock, Paper, Scissors: Which do you choose?").toLowerCase();
+					let computerSelection = computerPlay();
+					let playerSelection = getUserChoice ();
+					console.log("playerSelection");
+					console.log(playerSelection);
+					console.log("computerSelection");
+					console.log(computerSelection);
+					getResult(playerSelection, computerSelection);
+				// }
+		}
+	</script>
 </body>
 </html>
