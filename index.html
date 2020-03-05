@@ -2,6 +2,23 @@
  <html>
  <head>
 <title>This is a list of practice projects</title>	
+ <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@700&display=swap" rel="stylesheet">
+<style>
+	 * {
+        box-sizing: border-box;
+      }
+	body {
+		line-height: 135%;
+		width: 90%;
+		margin: auto;
+	}
+	h1, h2, h3, h4, h5, h6 {
+		font-family: Spartan, sans-serif;
+	}
+	p,li {
+		font-family: helvetica, sans-serif;
+	}
+</style>
 </head>
 <body>
 	<h1>Practice makes perfect</h1>
@@ -9,7 +26,7 @@
 <p>In this exercise, we want you to print out a simple launch countdown to the output box, from 10 down to Blastoff. Specifically, we want you to:</p>
 <ul>
 <li>Loop from 10 down to 0. We've provided you with an initializer — let i = 10;.</li>
-<li>For each iteration, create a new paragraph and append it to the output <div>, which we've selected using const output = document.querySelector('.output');.</li> 
+<li>For each iteration, create a new paragraph and append it to the output, which we've selected using const output = document.querySelector('.output');.</li> 
 <li>In comments, we've provided you with three code lines that need to be used somewhere inside the loop:
 <ul>
 	<li>const para = document.createElement('p'); — creates a new paragraph.</li>
@@ -26,5 +43,67 @@
 </li>
 <li>Remember to include an iterator! However, in this example we are counting down after each iteration, not up, so you don't want i++ — how do you iterate downwards?</li>
 </ul>
+<div class="output">
+</div>
+<h2>Active learning: Filling in a guest list</h2>
+
+<p>In this exercise, we want you to take a list of names stored in an array and put them into a guest list. But it's not quite that easy — we don't want to let Phil and Lola in because they are greedy and rude, and always eat all the food! We have two lists, one for guests to admit, and one for guests to refuse.</p>
+
+<p>Specifically, we want you to:</p>
+<ul>
+<li>Write a loop that will iterate from 0 to the length of the people array. You'll need to start with an initializer of  let i = 0;, but what exit condition do you need?</li></ul>
+<p>During each loop iteration, check if the current array item is equal to "Phil" or "Lola" using a conditional statement:</p>
+<ul>
+	<li>If it is, concatenate the array item to the end of the refused paragraph's textContent, followed by a comma and a space.</li>
+<li>If it isn't, concatenate the array item to the end of the admitted paragraph's textContent, followed by a comma and a space.</li>
+</ul>
+<p>We've already provided you with:</p>
+<ul><li>
+let i = 0; — Your initializer.
+refused.textContent += — the beginnings of a line that will concatenate something on to the end of refused.textContent.</li>
+<li>admitted.textContent += — the beginnings of a line that will concatenate something on to the end of admitted.textContent.</li>
+<li>Extra bonus question — after completing the above tasks successfully, you will be left with two lists of names, separated by commas, but they will be untidy — there will be a comma at the end of each one. Can you work out how to write lines that slice the last comma off in each case, and add a full stop to the end? Have a look at the Useful string methods article for help.
+</li></ul>
+<hr>
+<p class="admitted"></p>
+<p class="refused"></p>
+<script>
+
+const people = ['Chris', 'Anne', 'Colin', 'Terri', 'Phil', 'Lola', 'Sam', 'Kay', 'Bruce'];
+    
+const admitted = document.querySelector('.admitted');
+const refused = document.querySelector('.refused');
+admitted.textContent = 'Admit: ';
+refused.textContent = 'Refuse: '
+
+
+for(let i = 0; i < people.length; i++) {
+	// admittedArray.push(people[i]);
+	if(people[i] == 'Lola'|| people[i] == 'Phil') {
+ 		 refused.textContent +=  people[i] + ', ';
+	} else {
+		 admitted.textContent +=   people[i] + ', ';
+	}
+}
+
+refused.textContent = admitted.textContent.slice(0,refused.textContent.length-2) + '.';
+admitted.textContent = admitted.textContent.slice(0,admitted.textContent.length-2) + '.';
+	// const output = document.querySelector('.output');
+	// output.innerHTML = '';
+	// let i = 10;
+	// while(i >= 0) {
+	// 	let para = document.createElement("p");
+
+	// 	if(i == 10) {
+	// 		para.textContent = "Countdown 10";
+	// 	} else if (i == 0) {
+	// 		para.textContent = "Blast off!";
+	// 	} else {
+	// 		para.textContent = i;
+	// 	}
+	// output.appendChild(para);
+	// i--;
+	// }
+</script>
 </body>
 </html>
