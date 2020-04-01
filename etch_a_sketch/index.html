@@ -1,16 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html  lang="en">
 <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<title>Etch-a-Sketch</title>
+	<style>
+		* {
+			box-sizing: border-box;
+		}
+		.buttons {
+			width: 480px;
+
+			margin: 2% auto;
+		}
+		.container {
+			display:flex;
+			margin: 0 auto;
+			width: 480px;
+			height: 480px;
+			flex-flow: row wrap;
+			justify-content: center;
+		}
+		.flex-item {
+			width: 30px;
+			height:30px;
+			margin:0;
+			border: 1px solid black;
+		}
+	</style>
 </head>
 <body>
-	<div class="container">
-		
-	</div>
-<ul>
-	<li>16x16 grid of square divs</li>
-	<li>Create the divs using JavaScript</li>
-	<li>flexbox</li>
+	<ul>
+	<li style="text-decoration: line-through">16x16 grid of square divs</li>
+	<li style="text-decoration: line-through">Create the divs using JavaScript</li>
+	<li style="text-decoration: line-through">flexbox</li>
 	<li>Set up a “hover” effect so that the grid divs change color when your mouse passes over them, leaving a (pixelated) trail through your grid like a pen would.</li>
 	<li>adding a new class to the div</li>
 	<li>changing the div’s background color using JavaScript</li>
@@ -19,7 +41,34 @@
 	<li>(Optional): Instead of just changing the color of your grid from black to white (for example) have each pass through it with the mouse change to a completely random RGB value. Then try having each pass just add another 10% of black to it so that only after 10 passes is the square completely black.
 Push your project to GitHub!</li>
 </ul>
+	<div class="buttons">
+		<button id="clear">Clear Sketch</button>
+		<button id="customGrid">Create custom grid</button>
+	</div>
+	<div class="container">
+		
+	</div>
 
 
+<script>
+	let container = document.querySelector('.container');
+	let gridNumber = 256;
+	 // let box = document.createElement('<div class="flex-item"></div>');
+	for (let i = 1; i <= gridNumber; i++) {
+		container.innerHTML += `<div class="flex-item grid"></div>`; 
+	}
+	// create custom grid
+	function createCustomGrid (e) { 
+      const customGrid = document.querySelector(`#customGrid`); 
+      const updateGridNumber = prompt('How many squares per side (wide and tall) would you like to make the new grid?');
+      let container = document.querySelector('.container');
+      container.innerHTML = '';
+      for (let i = 1; i <= updateGridNumber; i++) {
+		container.innerHTML += `<div class="flex-item grid"></div>`; 
+	  }
+    }
+    let customGrid = document.querySelector('#customGrid');
+     customGrid.addEventListener('click', createCustomGrid);
+</script>
 </body>
 </html>
