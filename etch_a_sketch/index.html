@@ -18,7 +18,7 @@
 			width: 480px;
 			height: 480px;
 			flex-flow: row wrap;
-			justify-content: center;
+			justify-content: flex-start;
 		}
 		.flex-item {
 			width: 30px;
@@ -52,7 +52,8 @@ Push your project to GitHub!</li>
 
 <script>
 	let container = document.querySelector('.container');
-	let gridNumber = 256;
+	let gridNumber = 16;
+	gridNumber = Math.pow(gridNumber, 2)
 	 // let box = document.createElement('<div class="flex-item"></div>');
 	for (let i = 1; i <= gridNumber; i++) {
 		container.innerHTML += `<div class="flex-item grid"></div>`; 
@@ -61,9 +62,12 @@ Push your project to GitHub!</li>
 	function createCustomGrid (e) { 
       const customGrid = document.querySelector(`#customGrid`); 
       const updateGridNumber = prompt('How many squares per side (wide and tall) would you like to make the new grid?');
+      let updateGridNumberSquared = Math.pow(updateGridNumber, 2)
       let container = document.querySelector('.container');
+      let updatedSize = 30 * updateGridNumber;
+      container.setAttribute("style",`width: ${updatedSize}px; height: ${updatedSize}px;`);
       container.innerHTML = '';
-      for (let i = 1; i <= updateGridNumber; i++) {
+      for (let i = 1; i <= updateGridNumberSquared; i++) {
 		container.innerHTML += `<div class="flex-item grid"></div>`; 
 	  }
     }
