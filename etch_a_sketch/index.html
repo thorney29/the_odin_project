@@ -7,72 +7,208 @@
 		* {
 			box-sizing: border-box;
 		}
+		.wrapper {
+			display:flex;
+			flex-flow:row wrap;
+			justify-content: center;
+			width: 94%;
+			margin:auto;
+		}
+		aside {
+			width: 30%;
+		}
+		.container-wrapper {
+			width: 70%;
+		}
+		h1 {
+			font-size: 3rem;
+			text-align: center;
+			margin:4% auto 2%;
+		}
 		.buttons {
+			display:flex;
+			flex-flow: column;
+			justify-content: center;
 			width: 480px;
-
 			margin: 2% auto;
 		}
-		.container {
-			display:flex;
-			margin: 0 auto;
-			width: 480px;
-			height: 480px;
-			flex-flow: row wrap;
-			justify-content: flex-start;
+		button {
+			display: table;
+			width: 100%;
+			margin:2% auto;
+			font-size: 1.4em;
+			padding: .625em;
 		}
-		.flex-item {
-			width: 30px;
-			height:30px;
+		.buttons:nth-child(1n):hover {
+			backgound: black;
+		}
+		.container {
+			border: 100px solid red;
+			border-radius: 8px;
+			display:grid;
+			margin: 0 auto;
+			max-width: 960px;
+			height: 960px;
+			flex-flow: row wrap;
+			justify-content: center;
+			background: #ccc;
+		}
+		.grid {
 			margin:0;
-			border: 1px solid black;
+		}
+		.background {
+			background: #000;
 		}
 	</style>
 </head>
 <body>
-	<ul>
-	<li style="text-decoration: line-through">16x16 grid of square divs</li>
-	<li style="text-decoration: line-through">Create the divs using JavaScript</li>
-	<li style="text-decoration: line-through">flexbox</li>
-	<li>Set up a “hover” effect so that the grid divs change color when your mouse passes over them, leaving a (pixelated) trail through your grid like a pen would.</li>
-	<li>adding a new class to the div</li>
-	<li>changing the div’s background color using JavaScript</li>
-	<li>Add a button to the top of the screen which will clear the current grid and send the user a popup asking for how many squares per side to make the new grid. Once entered the new grid should be generated in the same total space as before (e.g. 960px wide) and now you’ve got a new sketch pad.</li>
-	<li>You should be able to enter 64 and have a brand new 64x64 grid pop up without changing the total amount of pixels used</li>
-	<li>(Optional): Instead of just changing the color of your grid from black to white (for example) have each pass through it with the mouse change to a completely random RGB value. Then try having each pass just add another 10% of black to it so that only after 10 passes is the square completely black.
-Push your project to GitHub!</li>
-</ul>
-	<div class="buttons">
-		<button id="clear">Clear Sketch</button>
-		<button id="customGrid">Create custom grid</button>
+	<div class="wrapper">
+		<aside>
+			<h1>Etch A Sketch</h1>
+			<div class="buttons">
+				<button id="clear">Reset Sketch</button>
+				<button id="customGrid">Create custom grid</button>
+				<button id="randomColor">Sketch with random color rainbow</button>
+				<button id="erase">Erase</button>
+			</div>
+		</aside>
+		<div class="container-wrapper">
+			<div class="container">
+				<!-- insert grid boxes here -->
+			</div>
+		</div>
 	</div>
-	<div class="container">
-		
-	</div>
-
 
 <script>
+	/* Get container element
+	* set default grid at 16 rows and 16 columns
+	* create grid with classes flex-item and grid
+	*/
 	let container = document.querySelector('.container');
 	let gridNumber = 16;
-	gridNumber = Math.pow(gridNumber, 2)
-	 // let box = document.createElement('<div class="flex-item"></div>');
-	for (let i = 1; i <= gridNumber; i++) {
-		container.innerHTML += `<div class="flex-item grid"></div>`; 
+	let gridNumberSq = Math.pow(gridNumber, 2)
+	container.setAttribute('style', `grid-template-columns: repeat(${gridNumber},1fr);`)
+	for (let i = 1; i <= gridNumberSq; i++) {
+		container.innerHTML += `<div class="grid"></div>`; 
 	}
-	// create custom grid
-	function createCustomGrid (e) { 
-      const customGrid = document.querySelector(`#customGrid`); 
-      const updateGridNumber = prompt('How many squares per side (wide and tall) would you like to make the new grid?');
-      let updateGridNumberSquared = Math.pow(updateGridNumber, 2)
-      let container = document.querySelector('.container');
-      let updatedSize = 30 * updateGridNumber;
-      container.setAttribute("style",`width: ${updatedSize}px; height: ${updatedSize}px;`);
-      container.innerHTML = '';
-      for (let i = 1; i <= updateGridNumberSquared; i++) {
-		container.innerHTML += `<div class="flex-item grid"></div>`; 
-	  }
+
+ 	/* get grid boxes by selecting all classes of grid
+ 	*  on mousemove add class background to style background black 
+ 	*/
+	function addBackground (e) {
+	 	let gridBoxes= document.querySelectorAll('.grid');
+	 	gridBoxes.forEach(gridBox => gridBox.addEventListener('mousemove', addBackground));
+
+ 		this.classList.add('background');
+ 		this.style.opacity = (parseFloat(this.style.opacity) || 0) + 0.2;
     }
+
+	/* Remove background class */
+     function removeBackground (e) {
+ 		this.classList.remove('background');
+    }
+
+	/* Create a custom grid that allows the user to set the grid size
+ 	*  user clicks on custom grid button
+ 	*  user answers prompt to get grid number (n X p)
+ 	*  that number will be used to set grid with
+ 	*  that number is squared for grid box total
+ 	*  grid items are created and inserted into container
+ 	*  an event listener is added to grid items to change background initiated by click
+ 	*/
+	function createCustomGrid (e) { 
+		const customGrid = document.querySelector(`#customGrid`); 
+		const updateGridNumber = prompt('How many squares per side (wide and tall) would you like to make the new grid? Even numbers work best.');
+		let updateGridNumberSquared = Math.pow(updateGridNumber, 2)
+		let container = document.querySelector('.container');
+		container.setAttribute('style', `grid-template-columns: repeat(${updateGridNumber},1fr);`);
+		container.innerHTML = '';
+
+      	for (let i = 1; i <= updateGridNumberSquared; i++) {
+			container.innerHTML += `<div class="grid"></div>`; 
+	  	}
+
+	 	let gridBoxes= document.querySelectorAll('.grid');
+	 	gridBoxes.forEach(gridBox => gridBox.addEventListener('click', addBackground));
+    }
+
+	/* User clicks on custom grid color 
+ 	*  Create a random color
+ 	*  user answers prompt to get grid number (n X p)
+ 	*  that number will be used to set grid with
+ 	*  that number is squared for grid box total
+ 	*  grid items are created and inserted into container
+ 	*  an event listener is added to grid items to change background initiated by click
+ 	*/
+ 	function setBackgroundRandomColor () {
+
+ 		// let randomColor = "#"+((1<<24)*Math.random()|0).toString(16); 
+ 		let randomColor = "#"+ Math.floor(Math.random()*16777215).toString(16);
+ 		this.classList.remove('background');
+ 		this.setAttribute('style', `background: ${randomColor};`)
+ 		this.style.opacity = (parseFloat(this.style.opacity) || 0) + 1;
+ 		let gridBoxes= document.querySelectorAll('.grid');
+    	gridBoxes.forEach(gridBox => gridBox.addEventListener('mouseenter', setBackgroundRandomColor));
+ 	}
+    function addBackgroundRandomColor (e) {
+    	let gridBoxes= document.querySelectorAll('.grid');
+    	gridBoxes.forEach(gridBox => gridBox.classList.remove('background'));
+    	gridBoxes.forEach(gridBox => gridBox.addEventListener('click', setBackgroundRandomColor));
+	 	gridBoxes.forEach(gridBox => gridBox.removeEventListener('mousemove', addBackground));
+	 	gridBoxes.forEach(gridBox => gridBox.removeEventListener('mousemove', eraseIt));
+       }
+    function eraseIt () {
+    	this.classList.remove('background');
+ 		this.removeAttribute('style', `background: ${randomColor};`)
+
+    	
+    	// this.style.background = 'transparent';
+    }
+    function eraseBackground () {
+    	let grid = document.querySelector('.grid');
+    	let gridBoxes = document.querySelectorAll('.grid');
+
+    	gridBoxes.forEach(gridBox => gridBox.removeEventListener('click', addBackground));
+    	gridBoxes.forEach(gridBox => gridBox.removeEventListener('click', setBackgroundRandomColor));
+    	gridBoxes.forEach(gridBox => gridBox.removeEventListener('mousemove', addBackground));
+    	gridBoxes.forEach(gridBox => gridBox.removeEventListener('mouseenter', setBackgroundRandomColor));
+    	gridBoxes.forEach(gridBox => gridBox.addEventListener('mousemove', eraseIt));
+
+    }
+
+    // Add event listeners
+
+    // Add clear grid event listener
+    let clear = document.getElementById('clear');
+    clear.addEventListener('click', clearGrid);
+       
+    // Add custom grid event listener
     let customGrid = document.querySelector('#customGrid');
-     customGrid.addEventListener('click', createCustomGrid);
+    customGrid.addEventListener('click', createCustomGrid);
+
+    // Add background event listener
+	let gridBoxes= document.querySelectorAll('.grid');
+    gridBoxes.forEach(gridBox => gridBox.addEventListener('click', addBackground));
+
+    // Add random color event listener
+    let randomColorGenerator = document.getElementById('randomColor');
+    randomColorGenerator.addEventListener('click', addBackgroundRandomColor);
+ 	
+ 	// Add erase event listener
+    let eraser = document.getElementById('erase');
+    eraser.addEventListener('click', eraseBackground);
+ 	
+ 	/* Clear grid and reset to on click set background (this is not working) */
+ 	function clearGrid (e) {
+		let gridBoxes= document.querySelectorAll('.grid');
+    	gridBoxes.forEach(gridBox => gridBox.classList.remove('background'));
+    	gridBoxes.forEach(gridBox => gridBox.removeAttribute('style')); 	
+    	gridBoxes.forEach(gridBox => gridBox.removeEventListener('mouseenter', setBackgroundRandomColor));
+	 	gridBoxes.forEach(gridBox => gridBox.removeEventListener('mousemove', addBackground));
+    }
+
+
+
 </script>
 </body>
 </html>
