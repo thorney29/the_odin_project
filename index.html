@@ -2,7 +2,7 @@
 <html>
 <head>
  <meta charset="utf-8"/>
-    <title>Loops: Task 1</title>
+    <title>Projects Landing Page</title>
     <style>
     	body {
     		width: 90%;
@@ -20,157 +20,12 @@
   </head>
 
   <body>
-  <div>
-    <h2><a href="https://thorney29.github.io/the_odin_project/google-homepage/index.html">Google Homepage</a></h2>
-    <h2><a href="https://thorney29.github.io/the_odin_project/practice-exercises/index.html">Practice Exercises</a></h2>
-    <h2><a href="https://thorney29.github.io/the_odin_project/rock_paper_scissors/index.html">Rock Paper Scissors</a></h2>
-    <h2><a href="https://thorney29.github.io/the_odin_project/JavaScript30-master/01 - JavaScript Drum Kit/index-START.html">Drum Kit</a></h2>
-    <h2><a href="https://thorney29.github.io/the_odin_project/etch_a_sketch/index.html">Etch A Sketch</a></h2>
-</div>
-
-  	<h1>Loops 1</h1>
-	<p>In our first looping task we want you start by creating a simple loop that goes through all the items in the provided myArray and prints them out on the screen inside list items, which are appended to the provided list.</p>
-    <section class="preview">
-    </section>
-	<h2>Loops 2</h2>
-	<p>
-	In this next task, we want you to write a simple program that, given a name, searches an array of objects containing names and emails (phonebook) and, if it finds the name, outputs the name and phone number into the paragraph (para) and then exits the loop before it has run its course. 
-	</p>
-	<p>You are given three variables to begin with:</p>
-	<ul>
-	<li>i — starts off with a value of 0; intended to be used as an iterator.</li>
-	<li>name — contains a name to search for</li>
-	<li>para — contains a reference to a paragraph, which will be used to report the results.</li></ul>
-	<p>You should use a type of loop that you've not used in the previous task.</p>
-	<section id="loop2"></section>
-
-	<h2>Loops 3</h2>
-<p>In this final task, you are provided with the following:</p>
-<ul>
-<li>i — starts off with a value of 500; intended to be used as an iterator.</li>
-<li>para — contains a reference to a paragraph, which will be used to report the results.</li>
-<li>isPrime() — a function that, when passed a number, returns true if the number is a prime number, and false if not.</li></ul>
-<p>You need to use a loop to go through the numbers 1 to 500, backwards, and run the provided isPrime() function on them. For each number that isn't a prime number, continue on to the next loop iteration. For each one that is a prime number, add it to the paragraph's textContent along with some kind of separator.</p>
-<section id="isPrime"></section>
-  <h1 style="text-transform: initial;">
-    DOM MANIPULATION
-  </h1>
-<ol>
-<li>a p with red text that says “Hey I’m red!”</li>
-<li>an h3 with blue text that says “I’m a blue h3!”</li>
-<li>a div with a black border and pink background color with the following elements inside of it:
-<ol><li>another  h1  that says “I’m in a div”</li>
-<li>a p that says “ME TOO!”</li>
-<li>Hint for this one: after creating the div with createElement, append the  h1  and p to it before adding it to the container.</li>
-</ol>
-</ol>
-
-  <div id="container">
-    <div class="newContent">
-      This is the glorious text-content!
+    <div>
+      <h2><a href="https://thorney29.github.io/the_odin_project/google-homepage/index.html">Google Homepage</a></h2>
+      <h2><a href="https://thorney29.github.io/the_odin_project/practice-exercises/index.html">Practice Exercises</a></h2>
+      <h2><a href="https://thorney29.github.io/the_odin_project/rock_paper_scissors/index.html">Rock Paper Scissors</a></h2>
+      <h2><a href="https://thorney29.github.io/the_odin_project/JavaScript30-master/01 - JavaScript Drum Kit/index-START.html">Drum Kit</a></h2>
+      <h2><a href="https://thorney29.github.io/the_odin_project/etch_a_sketch/index.html">Etch A Sketch</a></h2>
     </div>
-  </div>
-
   </body>
-  <script>
-    // dom manipulation
-    let newContent = document.querySelector('.newContent');
-    let redPara = document.createElement('p');
-    redPara.textContent = 'Hey I’m red!';
-    redPara.style.color = 'red';
-    redPara.setAttribute('class','redPara');
-    let blueH3 = document.createElement('h3');
-    blueH3.textContent = 'I’m a blue h3!';
-    blueH3.style.color = 'blue';
-    newContent.appendChild(redPara);
-    redPara = document.querySelector('.redPara');
-    newContent.insertBefore(blueH3, redPara);
-    let newDiv = document.createElement('div');
-    let newDivH1 = document.createElement('h1');
-    let newDivP = document.createElement('p');
-    newDivP.textContent = 'ME TOO!';
-    newDivH1.textContent = 'I’m in a div';
-    newDiv.setAttribute('style', 'background: pink; border: 1px solid black');    
-    newContent.appendChild(newDiv);
-    newDiv.appendChild(newDivH1).appendChild(newDivP);
-
-  	// #3
-  	// check its primeness
-  	// if not prime continue to next number
-  	// if it is prime add to paragraph with a separator
-	
- 	let n = 500;
-    let para3 = document.createElement('p');
-	para3.classList.add('primeNumbers');
-
-    function isPrime(num) {
-      for(let i = 2; i < num; i++) {
-        if(num % i === 0) {
-          return false;
-        }
-      }
-      return true;
-    }
-   //loop numbers 1 - 500 
-    // Add your code here
-	while(n >= 1) {
-		console.log(isPrime(n));
-		let result = (isPrime(n));
-		if (result == true) {
-			console.log(n);
-	  		para3.textContent += n + ', ';
-	  	} 
-	  n--;
-	}
-    // Don't edit the code below here!
-    let section3 = document.getElementById('isPrime');
-    section3.appendChild(para3);
-
- 	para3.textContent= para3.textContent.slice(0, para3.textContent.length - 2)  + '.';
- 	para3.textContent = newPara3string;
- 	
- 	// #2
-  	let name = 'Mustafa';
-
-    let para = document.createElement('p');
-    let phonebook = [
-      { name : 'Chris', number : '1549' },
-      { name : 'Li Kang', number : '9634' },
-      { name : 'Anne', number : '9065' },
-      { name : 'Francesca', number : '3001' },
-      { name : 'Mustafa', number : '6888' },
-      { name : 'Tina', number : '4312' },
-      { name : 'Bert', number : '7780' },
-      { name : 'Jada', number : '2282' },
-    ]
-	let m = 0;
-
-	do {
-		if (name === phonebook[m].name) {
-			para.innerHTML = `${phonebook[m].name} : ${phonebook[m].number}`;
-		} else {
-			console.log(phonebook[m].name);
-		}
-
-		m++;
-	} while (m < phonebook.length);
-
-    // Don't edit the code below here!
-    let section2 = document.getElementById('loop2');
-    section2.appendChild(para);
-
-    // #1
-    let myArray = ['tomatoes', 'chick peas', 'onions', 'rice', 'black beans'];
-    let list = document.createElement('ul');
-
-    // Add your code here
-    for (var i = 0; i < myArray.length; i++) {
-    	list.innerHTML += `<li>${myArray[i]}</li>`; 
-    }
-    // Don't edit the code below here!
-
-    const section = document.querySelector('section');
-    section.appendChild(list);
-  </script>
-
 </html>

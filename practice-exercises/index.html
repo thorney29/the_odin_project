@@ -1,7 +1,7 @@
  <!DOCTYPE html>
  <html>
  <head>
-<title>This is a list of practice projects</title>	
+<title>Practice projects</title>	
  <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@700&display=swap" rel="stylesheet">
 <style>
 	 * {
@@ -25,24 +25,26 @@
 	<h2>Active learning: Launch countdown!</h2>
 <p>In this exercise, we want you to print out a simple launch countdown to the output box, from 10 down to Blastoff. Specifically, we want you to:</p>
 <ul>
-<li>Loop from 10 down to 0. We've provided you with an initializer — let i = 10;.</li>
-<li>For each iteration, create a new paragraph and append it to the output, which we've selected using const output = document.querySelector('.output');.</li> 
-<li>In comments, we've provided you with three code lines that need to be used somewhere inside the loop:
-<ul>
-	<li>const para = document.createElement('p'); — creates a new paragraph.</li>
-	<li>output.appendChild(para); — appends the paragraph to the output </li>
-	<li>para.textContent = — makes the text inside the paragraph equal to whatever you put on the right-hand side, after the equals sign.</li>
+	<li>Loop from 10 down to 0. We've provided you with an initializer — let i = 10;.</li>
+	<li>For each iteration, create a new paragraph and append it to the output, which we've selected using const output = document.querySelector('.output');.</li> 
+	<li>In comments, we've provided you with three code lines that need to be used somewhere inside the loop:
+		<ul>
+			<li>const para = document.createElement('p'); — creates a new paragraph.</li>
+			<li>output.appendChild(para); — appends the paragraph to the output </li>
+			<li>para.textContent = — makes the text inside the paragraph equal to whatever you put on the right-hand side, after the equals sign.</li>
+		</ul>
+	</li>
+	<li>Different iteration numbers require different text to be put in the paragraph for that iteration (you'll need a conditional statement and multiple para.textContent = lines):
+		<ul>
+			<li>If the number is 10, print "Countdown 10" to the paragraph.</li>
+			<li>If the number is 0, print "Blast off!" to the paragraph.</li>
+			<li>For any other number, print just the number to the paragraph.</li>
+		</ul>
+	</li>
+	<li>Remember to include an iterator! However, in this example we are counting down after each iteration, not up, so you don't want i++ — how do you iterate downwards?</li>
 </ul>
-</li>
-<li>Different iteration numbers require different text to be put in the paragraph for that iteration (you'll need a conditional statement and multiple para.textContent = lines):
-<ul>
-	<li>If the number is 10, print "Countdown 10" to the paragraph.</li>
-	<li>If the number is 0, print "Blast off!" to the paragraph.</li>
-	<li>For any other number, print just the number to the paragraph.</li>
-</ul>
-</li>
-<li>Remember to include an iterator! However, in this example we are counting down after each iteration, not up, so you don't want i++ — how do you iterate downwards?</li>
-</ul>
+<button id="countdown">Countdown</button>
+
 <div class="output">
 </div>
 <h2>Active learning: Filling in a guest list</h2>
@@ -67,56 +69,208 @@ refused.textContent += — the beginnings of a line that will concatenate someth
 <hr>
 <p class="admitted"></p>
 <p class="refused"></p>
-
+<p>
 Write a loop which prompts for a number greater than 100. If the visitor enters another number – ask them to input again.
 
 The loop must ask for a number until either the visitor enters a number greater than 100 or cancels the input/enters an empty line.
 
-Here we can assume that the visitor only inputs numbers. There’s no need to implement a special handling for a non-numeric input in this task.
+Here we can assume that the visitor only inputs numbers. There’s no need to implement a special handling for a non-numeric input in this task.</p>
+<button id="getNumber">Test Number</button>
+<h1>Loops 1</h1>
+	<p>In our first looping task we want you start by creating a simple loop that goes through all the items in the provided myArray and prints them out on the screen inside list items, which are appended to the provided list.</p>
+    <section class="preview">
+    </section>
+	<h2>Loops 2</h2>
+	<p>
+	In this next task, we want you to write a simple program that, given a name, searches an array of objects containing names and emails (phonebook) and, if it finds the name, outputs the name and phone number into the paragraph (para) and then exits the loop before it has run its course. 
+	</p>
+	<p>You are given three variables to begin with:</p>
+	<ul>
+	<li>i — starts off with a value of 0; intended to be used as an iterator.</li>
+	<li>name — contains a name to search for</li>
+	<li>para — contains a reference to a paragraph, which will be used to report the results.</li></ul>
+	<p>You should use a type of loop that you've not used in the previous task.</p>
+	<section id="loop2"></section>
+
+	<h2>Loops 3</h2>
+<p>In this final task, you are provided with the following:</p>
+<ul>
+<li>i — starts off with a value of 500; intended to be used as an iterator.</li>
+<li>para — contains a reference to a paragraph, which will be used to report the results.</li>
+<li>isPrime() — a function that, when passed a number, returns true if the number is a prime number, and false if not.</li></ul>
+<p>You need to use a loop to go through the numbers 1 to 500, backwards, and run the provided isPrime() function on them. For each number that isn't a prime number, continue on to the next loop iteration. For each one that is a prime number, add it to the paragraph's textContent along with some kind of separator.</p>
+<section id="isPrime"></section>
+  <h1 style="text-transform: initial;">
+    DOM MANIPULATION
+  </h1>
+<ol>
+<li>a p with red text that says “Hey I’m red!”</li>
+<li>an h3 with blue text that says “I’m a blue h3!”</li>
+<li>a div with a black border and pink background color with the following elements inside of it:
+<ol><li>another  h1  that says “I’m in a div”</li>
+<li>a p that says “ME TOO!”</li>
+<li>Hint for this one: after creating the div with createElement, append the  h1  and p to it before adding it to the container.</li>
+</ol>
+</ol>
+
+  <div id="container">
+    <div class="newContent">
+      This is the glorious text-content!
+    </div>
+  </div>
 <script>
-//num > 100
-let int = 0;
-let num = prompt('Enter a number greater than 100');
-while(num <= 100) {
-	num = prompt(`No, you entered ${num}. Enter a number GREATER than 100`);
-	// good
-}
+	// countdown
+	const output = document.querySelector('.output');
+	output.innerHTML = '';
+	function countDownToBlastoff () {
+		let i = 10;
+			while(i >= 0) {
+			let para = document.createElement("p");
+ 
+			if(i == 10) {
+				para.textContent = "Countdown 10";
+			} else if (i == 0) {
+				para.textContent = "Blast off!";
+			} else {
+				para.textContent = i;
+			}
+		output.appendChild(para);
+		i--;
+		}
+	}
+function getNumberToTest () {
+	let int = 0;
+	let num = prompt('To avoid a loop you must enter a number greater than 100');
 
-const people = ['Chris', 'Anne', 'Colin', 'Terri', 'Phil', 'Lola', 'Sam', 'Kay', 'Bruce'];
-    
-const admitted = document.querySelector('.admitted');
-const refused = document.querySelector('.refused');
-admitted.textContent = 'Admit: ';
-refused.textContent = 'Refuse: '
-
-
-for(let i = 0; i < people.length; i++) {
-	// admittedArray.push(people[i]);
-	if(people[i] == 'Lola'|| people[i] == 'Phil') {
- 		 refused.textContent +=  people[i] + ', ';
-	} else {
-		 admitted.textContent +=   people[i] + ', ';
+	while(num <= 100) {
+		num = prompt(`No, you entered ${num}. Enter a number GREATER than 100`);
+		// good
+	}
+	if(num >=100) {
+		alert('You did great!');
 	}
 }
+	const people = ['Chris', 'Anne', 'Colin', 'Terri', 'Phil', 'Lola', 'Sam', 'Kay', 'Bruce'];
+	const admitted = document.querySelector('.admitted');
+	const refused = document.querySelector('.refused');
+	admitted.textContent = 'Admit: ';
+	refused.textContent = 'Refuse: '
 
-refused.textContent = admitted.textContent.slice(0,refused.textContent.length-2) + '.';
-admitted.textContent = admitted.textContent.slice(0,admitted.textContent.length-2) + '.';
-	// const output = document.querySelector('.output');
-	// output.innerHTML = '';
-	// let i = 10;
-	// while(i >= 0) {
-	// 	let para = document.createElement("p");
+	for(let i = 0; i < people.length; i++) {
+		// admittedArray.push(people[i]);
+		if(people[i] == 'Lola'|| people[i] == 'Phil') {
+	 		 refused.textContent +=  people[i] + ', ';
+		} else {
+			 admitted.textContent +=   people[i] + ', ';
+		}
+	}
 
-	// 	if(i == 10) {
-	// 		para.textContent = "Countdown 10";
-	// 	} else if (i == 0) {
-	// 		para.textContent = "Blast off!";
-	// 	} else {
-	// 		para.textContent = i;
-	// 	}
-	// output.appendChild(para);
-	// i--;
-	// }
+	refused.textContent = admitted.textContent.slice(0,refused.textContent.length-2) + '.';
+	admitted.textContent = admitted.textContent.slice(0,admitted.textContent.length-2) + '.';
+	
+	const countdown = document.querySelector('#countdown');
+	countdown.addEventListener('click', countDownToBlastoff);
+	const getNumber = document.querySelector('#getNumber');
+	getNumber.addEventListener('click', getNumberToTest);
+
+	 // dom manipulation
+    let newContent = document.querySelector('.newContent');
+    let redPara = document.createElement('p');
+    redPara.textContent = 'Hey I’m red!';
+    redPara.style.color = 'red';
+    redPara.setAttribute('class','redPara');
+    let blueH3 = document.createElement('h3');
+    blueH3.textContent = 'I’m a blue h3!';
+    blueH3.style.color = 'blue';
+    newContent.appendChild(redPara);
+    redPara = document.querySelector('.redPara');
+    newContent.insertBefore(blueH3, redPara);
+    let newDiv = document.createElement('div');
+    let newDivH1 = document.createElement('h1');
+    let newDivP = document.createElement('p');
+    newDivP.textContent = 'ME TOO!';
+    newDivH1.textContent = 'I’m in a div';
+    newDiv.setAttribute('style', 'background: pink; border: 1px solid black');    
+    newContent.appendChild(newDiv);
+    newDiv.appendChild(newDivH1).appendChild(newDivP);
+
+  	// #3
+  	// check its primeness
+  	// if not prime continue to next number
+  	// if it is prime add to paragraph with a separator
+	
+ 	let n = 500;
+    let para3 = document.createElement('p');
+	para3.classList.add('primeNumbers');
+
+    function isPrime(num) {
+      for(let i = 2; i < num; i++) {
+        if(num % i === 0) {
+          return false;
+        }
+      }
+      return true;
+    }
+   //loop numbers 1 - 500 
+    // Add your code here
+	while(n >= 1) {
+		console.log(isPrime(n));
+		let result = (isPrime(n));
+		if (result == true) {
+			console.log(n);
+	  		para3.textContent += n + ', ';
+	  	} 
+	  n--;
+	}
+    // Don't edit the code below here!
+    let section3 = document.getElementById('isPrime');
+    section3.appendChild(para3);
+
+ 	para3.textContent= para3.textContent.slice(0, para3.textContent.length - 2)  + '.';
+ 	// para3.textContent = newPara3string;
+ 	
+ 	// #2
+  	let name = 'Mustafa';
+
+    let para = document.createElement('p');
+    let phonebook = [
+      { name : 'Chris', number : '1549' },
+      { name : 'Li Kang', number : '9634' },
+      { name : 'Anne', number : '9065' },
+      { name : 'Francesca', number : '3001' },
+      { name : 'Mustafa', number : '6888' },
+      { name : 'Tina', number : '4312' },
+      { name : 'Bert', number : '7780' },
+      { name : 'Jada', number : '2282' },
+    ]
+	let m = 0;
+
+	do {
+		if (name === phonebook[m].name) {
+			para.innerHTML = `${phonebook[m].name} : ${phonebook[m].number}`;
+		} else {
+			console.log(phonebook[m].name);
+		}
+
+		m++;
+	} while (m < phonebook.length);
+
+    // Don't edit the code below here!
+    let section2 = document.getElementById('loop2');
+    section2.appendChild(para);
+
+    // #1
+    let myArray = ['tomatoes', 'chick peas', 'onions', 'rice', 'black beans'];
+    let list = document.createElement('ul');
+
+    // Add your code here
+    for (var i = 0; i < myArray.length; i++) {
+    	list.innerHTML += `<li>${myArray[i]}</li>`; 
+    }
+    // Don't edit the code below here!
+
+    const section = document.querySelector('section');
+    section.appendChild(list);
 </script>
 </body>
 </html>
