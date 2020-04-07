@@ -58,7 +58,7 @@
 			margin:0;
 		}
 		.background {
-			background: #000;
+			background: #000 !important;
 		}
 	</style>
 </head>
@@ -100,13 +100,21 @@
 	function addBackground (e) {
 	 	let gridBoxes= document.querySelectorAll('.grid');
 	 	gridBoxes.forEach(gridBox => gridBox.addEventListener('mouseenter', addBackground));
- 		this.classList.add('background');
+ 		
+		this.style.background = null;
+		this.classList.add('background');
+
  		this.style.opacity = (parseFloat(this.style.opacity) || 0) + 0.2;
     }
 
 	/* Remove background class */
      function removeBackground (e) {
  		this.classList.remove('background');
+
+    	gridBoxes.forEach(gridBox => gridBox.removeEventListener('click', addBackground));
+    	gridBoxes.forEach(gridBox => gridBox.removeEventListener('click', setBackgroundRandomColor));
+    	gridBoxes.forEach(gridBox => gridBox.removeEventListener('mousemove', addBackground));
+    	gridBoxes.forEach(gridBox => gridBox.removeEventListener('click', setBackgroundRandomColor));
     }
 
 	/* Create a custom grid that allows the user to set the grid size
@@ -142,7 +150,6 @@
  	*  an event listener is added to grid items to change background initiated by click
  	*/
  	function setBackgroundRandomColor () {
-
  		// let randomColor = "#"+((1<<24)*Math.random()|0).toString(16); 
  		let randomColor = "#"+ Math.floor(Math.random()*16777215).toString(16);
  		this.classList.remove('background');
@@ -151,18 +158,32 @@
  		let gridBoxes= document.querySelectorAll('.grid');
     	gridBoxes.forEach(gridBox => gridBox.addEventListener('mouseenter', setBackgroundRandomColor));
  	}
+
     function addBackgroundRandomColor (e) {
     	let gridBoxes= document.querySelectorAll('.grid');
     	// gridBoxes.forEach(gridBox => gridBox.classList.remove('background'));
     	gridBoxes.forEach(gridBox => gridBox.addEventListener('click', setBackgroundRandomColor));
-	 	gridBoxes.forEach(gridBox => gridBox.removeEventListener('mousemove', addBackground));
+	 	gridBoxes.forEach(gridBox => gridBox.removeEventListener('mouseenter', addBackground));
 	 	gridBoxes.forEach(gridBox => gridBox.removeEventListener('mousemove', eraseIt));
-       }
+    }
+
+    function addBlackBackgroundColor (e) {
+    	let gridBoxes= document.querySelectorAll('.grid');
+    	// gridBoxes.forEach(gridBox => gridBox.classList.remove('background'));
+    	
+    	// remove
+
+	 	gridBoxes.forEach(gridBox => gridBox.removeEventListener('click', setBackgroundRandomColor));
+	 	gridBoxes.forEach(gridBox => gridBox.removeEventListener('mouseenter', setBackgroundRandomColor));
+	 	gridBoxes.forEach(gridBox => gridBox.removeEventListener('click', addBackgroundRandomColor));
+	 	gridBoxes.forEach(gridBox => gridBox.removeEventListener('mousemove', addBackgroundRandomColor));
+	 	gridBoxes.forEach(gridBox => gridBox.removeEventListener('mouseenter', addBackground));
+		// add
+	 	gridBoxes.forEach(gridBox => gridBox.addEventListener('click', addBackground));
+    }
     function eraseIt () {
     	this.classList.remove('background');
  		this.removeAttribute('style', `background: ${randomColor};`)
-
-    	
     	// this.style.background = 'transparent';
     }
     function eraseBackground () {
@@ -190,6 +211,9 @@
     // Add background event listener
 	let gridBoxes= document.querySelectorAll('.grid');
     gridBoxes.forEach(gridBox => gridBox.addEventListener('click', addBackground));
+
+    let blackColorGenerator = document.getElementById('blackColor');
+    blackColorGenerator.addEventListener('click', addBlackBackgroundColor);
 
     // Add random color event listener
     let randomColorGenerator = document.getElementById('randomColor');
