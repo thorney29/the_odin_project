@@ -67,8 +67,9 @@
 			<h1>Etch A Sketch</h1>
 			<div class="buttons">
 				<button id="clear">Reset Sketch</button>
-				<button id="customGrid">Create custom grid</button>
-				<button id="randomColor">Sketch with random color rainbow</button>
+				<button id="customGrid">Enter custom pencil size</button>
+				<button id="blackColor">Sketch with black pencil</button>
+				<button id="randomColor">Sketch with random colors</button>
 				<button id="erase">Erase</button>
 			</div>
 		</aside>
@@ -97,8 +98,7 @@
  	*/
 	function addBackground (e) {
 	 	let gridBoxes= document.querySelectorAll('.grid');
-	 	gridBoxes.forEach(gridBox => gridBox.addEventListener('mousemove', addBackground));
-
+	 	gridBoxes.forEach(gridBox => gridBox.addEventListener('mouseenter', addBackground));
  		this.classList.add('background');
  		this.style.opacity = (parseFloat(this.style.opacity) || 0) + 0.2;
     }
@@ -152,7 +152,7 @@
  	}
     function addBackgroundRandomColor (e) {
     	let gridBoxes= document.querySelectorAll('.grid');
-    	gridBoxes.forEach(gridBox => gridBox.classList.remove('background'));
+    	// gridBoxes.forEach(gridBox => gridBox.classList.remove('background'));
     	gridBoxes.forEach(gridBox => gridBox.addEventListener('click', setBackgroundRandomColor));
 	 	gridBoxes.forEach(gridBox => gridBox.removeEventListener('mousemove', addBackground));
 	 	gridBoxes.forEach(gridBox => gridBox.removeEventListener('mousemove', eraseIt));
@@ -171,7 +171,7 @@
     	gridBoxes.forEach(gridBox => gridBox.removeEventListener('click', addBackground));
     	gridBoxes.forEach(gridBox => gridBox.removeEventListener('click', setBackgroundRandomColor));
     	gridBoxes.forEach(gridBox => gridBox.removeEventListener('mousemove', addBackground));
-    	gridBoxes.forEach(gridBox => gridBox.removeEventListener('mouseenter', setBackgroundRandomColor));
+    	gridBoxes.forEach(gridBox => gridBox.removeEventListener('click', setBackgroundRandomColor));
     	gridBoxes.forEach(gridBox => gridBox.addEventListener('mousemove', eraseIt));
 
     }
