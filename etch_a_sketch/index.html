@@ -57,17 +57,18 @@
 		.grid {
 			margin:0;
 		}
-		.background {
+		/*.background {
 			background: #000 !important;
-		}
+		}*/
 	</style>
 </head>
 <body>
 	<div class="wrapper">
 		<aside>
 			<h1>Etch A Sketch</h1>
+			<p>Click on sketch to start drawing. Double click to stop.</p>
 			<div class="buttons">
-				<button id="clear">Reset Sketch</button>
+				<button id="reset">Reset Sketch</button>
 				<button id="customGrid">Enter custom pencil size</button>
 				<button id="blackColor">Sketch with black pencil</button>
 				<button id="randomColor">Sketch with random colors</button>
@@ -94,30 +95,6 @@
 		container.innerHTML += `<div class="grid"></div>`; 
 	}
 
- 	/* get grid boxes by selecting all classes of grid
- 	*  on mousemove add class background to style background black 
- 	*/
-	function addBackground (e) {
-	 	let gridBoxes= document.querySelectorAll('.grid');
-	 	gridBoxes.forEach(gridBox => gridBox.addEventListener('mouseenter', addBackground));
- 		gridBoxes.forEach(gridBox => gridBox.removeEventListener('click', addBackground));
-
-		// this.style.background = "black";
-		this.classList.add('background');
-
- 		this.style.opacity = (parseFloat(this.style.opacity) || 0) + 0.2;
-    }
-
-	/* Remove background class */
-     function removeBackground (e) {
- 		this.classList.remove('background');
-
-    	gridBoxes.forEach(gridBox => gridBox.removeEventListener('click', addBackground));
-    	gridBoxes.forEach(gridBox => gridBox.removeEventListener('click', setBackgroundRandomColor));
-    	gridBoxes.forEach(gridBox => gridBox.removeEventListener('mousemove', addBackground));
-    	gridBoxes.forEach(gridBox => gridBox.removeEventListener('click', setBackgroundRandomColor));
-    }
-
 	/* Create a custom grid that allows the user to set the grid size
  	*  user clicks on custom grid button
  	*  user answers prompt to get grid number (n X p)
@@ -139,9 +116,23 @@
 	  	}
 
 	 	let gridBoxes= document.querySelectorAll('.grid');
-	 	gridBoxes.forEach(gridBox => gridBox.addEventListener('click', addBackground));
+	 	gridBoxes.forEach(gridBox => gridBox.addEventListener('click', setBackgroundBlackColor),{ once: true });
     }
 
+ 	/* get grid boxes by selecting all classes of grid
+ 	*  on mousemove add class background to style background black 
+ 	*/
+	function setBackgroundBlackColor (e) {
+		let black = "#000";
+ 		this.style.background = `${black}`;
+ 		this.style.opacity = (parseFloat(this.style.opacity) || 0) + 0.2;
+	 	let gridBoxes= document.querySelectorAll('.grid');
+	 	gridBoxes.forEach(gridBox => gridBox.addEventListener('mouseenter', setBackgroundBlackColor));
+
+	 	gridBoxes.forEach(gridBox => gridBox.addEventListener('dblclick', noBackground));
+    }
+
+	
 	/* User clicks on custom grid color 
  	*  Create a random color
  	*  user answers prompt to get grid number (n X p)
@@ -151,103 +142,109 @@
  	*  an event listener is added to grid items to change background initiated by click
  	*/
  	function setBackgroundRandomColor () {
- 		// let randomColor = "#"+((1<<24)*Math.random()|0).toString(16); 
  		let randomColor = "#"+ Math.floor(Math.random()*16777215).toString(16);
- 		this.classList.remove('background');
  		this.setAttribute('style', `background: ${randomColor};`)
  		this.style.opacity = (parseFloat(this.style.opacity) || 0) + 1;
  		let gridBoxes= document.querySelectorAll('.grid');
- 		// remove click from add backgfound
- 		gridBoxes.forEach(gridBox => gridBox.removeEventListener('click', addBackgroundRandomColor));
- 		gridBoxes.forEach(gridBox => gridBox.removeEventListener('click', setBackgroundRandomColor));
+ 		// remove click from add background
+ 		gridBoxes.forEach(gridBox => gridBox.removeEventListener('click', addBackgroundBlackColorRandomColor));
+ 		// gridBoxes.forEach(gridBox => gridBox.removeEventListener('click', setBackgroundRandomColor));
+ 		gridBoxes.forEach(gridBox => gridBox.removeEventListener('mouseenter', setBackgroundBlackColor));
+
+ 		// add
     	gridBoxes.forEach(gridBox => gridBox.addEventListener('mouseenter', setBackgroundRandomColor));
+    	gridBoxes.forEach(gridBox => gridBox.addEventListener('dblclick', noBackground));
 
  	}
+/* Remove background class */
+     function removeBackground (e) {
+ 		this.classList.remove('background');
 
-    function addBackgroundRandomColor (e) {
+    	gridBoxes.forEach(gridBox => gridBox.removeEventListener('click', setBackgroundBlackColor));
+    	gridBoxes.forEach(gridBox => gridBox.removeEventListener('click', setBackgroundRandomColor));
+    	gridBoxes.forEach(gridBox => gridBox.removeEventListener('mousemove', setBackgroundBlackColor));
+    	gridBoxes.forEach(gridBox => gridBox.removeEventListener('click', setBackgroundRandomColor));
+    }
+    function addBlackBackgroundColor (e) {
     	let gridBoxes= document.querySelectorAll('.grid');
-    	// gridBoxes.forEach(gridBox => gridBox.classList.remove('background'));
+    	// remove
+    	gridBoxes.forEach(gridBox => gridBox.removeEventListener('click', noBackground));
+	 	gridBoxes.forEach(gridBox => gridBox.removeEventListener('click', setBackgroundRandomColor));
+	 	gridBoxes.forEach(gridBox => gridBox.removeEventListener('mouseenter', setBackgroundRandomColor));
+	 	gridBoxes.forEach(gridBox => gridBox.removeEventListener('mousemove', eraseIt));
+		// add
+	 	gridBoxes.forEach(gridBox => gridBox.addEventListener('click', setBackgroundBlackColor));
+    }
+
+    function addBackgroundBlackColorRandomColor (e) {
+    	let gridBoxes= document.querySelectorAll('.grid');
     	gridBoxes.forEach(gridBox => gridBox.addEventListener('click', setBackgroundRandomColor));
-	 	gridBoxes.forEach(gridBox => gridBox.removeEventListener('mouseenter', addBackground));
+	 	gridBoxes.forEach(gridBox => gridBox.removeEventListener('mouseenter', setBackgroundBlackColor));
 	 	gridBoxes.forEach(gridBox => gridBox.removeEventListener('mousemove', eraseIt));
     }
 
-    function addBlackBackgroundColor (e) {
-    	let gridBoxes= document.querySelectorAll('.grid');
-    	// gridBoxes.forEach(gridBox => gridBox.classList.remove('background'));
-    	
-    	// remove
+    function noBackground () {
+    	let gridBoxes = document.querySelectorAll('.grid');
+	 	gridBoxes.forEach(gridBox => gridBox.removeEventListener('mouseenter', setBackgroundBlackColor));
+    	gridBoxes.forEach(gridBox => gridBox.removeEventListener('mouseenter', setBackgroundRandomColor));
+    }
 
-	 	gridBoxes.forEach(gridBox => gridBox.removeEventListener('click', setBackgroundRandomColor));
-	 	gridBoxes.forEach(gridBox => gridBox.removeEventListener('mouseenter', setBackgroundRandomColor));
-	 	gridBoxes.forEach(gridBox => gridBox.removeEventListener('click', addBackgroundRandomColor));
-	 	gridBoxes.forEach(gridBox => gridBox.removeEventListener('mousemove', addBackgroundRandomColor));
-	 	gridBoxes.forEach(gridBox => gridBox.removeEventListener('mouseenter', addBackground));
-		// add
-	 	gridBoxes.forEach(gridBox => gridBox.addEventListener('click', addBackground));
-    }
     function eraseIt () {
-    	this.classList.remove('background');
- 		this.removeAttribute('style', `background: ${randomColor};`)
+    	// this.classList.remove('background');
     	// this.style.background = 'transparent';
+ 		// this.removeAttribute('style', `background: ${randomColor};`)
+    	this.style.background = null;
+    	let gridBoxes = document.querySelectorAll('.grid');
+    	gridBoxes.forEach(gridBox => gridBox.addEventListener('click', eraseIt));
     }
+ // erase 
     function eraseBackground () {
     	let grid = document.querySelector('.grid');
     	let gridBoxes = document.querySelectorAll('.grid');
     	// Remove event listeners 
-    	gridBoxes.forEach(gridBox => gridBox.removeEventListener('click', addBackground));
-    	gridBoxes.forEach(gridBox => gridBox.removeEventListener('click', setBackgroundRandomColor));
-    	gridBoxes.forEach(gridBox => gridBox.removeEventListener('mousemove', addBackground));
-    	gridBoxes.forEach(gridBox => gridBox.removeEventListener('click', setBackgroundRandomColor));
-    	gridBoxes.forEach(gridBox => gridBox.addEventListener('mousemove', eraseIt));
+    	gridBoxes.forEach(gridBox => gridBox.removeEventListener('mouseenter', setBackgroundBlackColor));
+    	gridBoxes.forEach(gridBox => gridBox.removeEventListener('mouseenter', setBackgroundRandomColor));
+    	// add
+    	gridBoxes.forEach(gridBox => gridBox.addEventListener('mouseenter', eraseIt));
     }
 
+/* Reset grid and reset to on click set background (this is not working) */
+ 	function resetGrid (e) {
+		let gridBoxes= document.querySelectorAll('.grid');
+    	// gridBoxes.forEach(gridBox => gridBox.removeAttribute('style', 'background'));
+    	gridBoxes.forEach(gridBox => gridBox.removeAttribute('style')); 	
 
-	// ['click','ontouchstart'].forEach( evt => 
- //    element.addEventListener(evt, dosomething, false)
-	// );
+	 	gridBoxes.forEach(gridBox => gridBox.removeEventListener('mouseenter', setBackgroundBlackColor));
+    	gridBoxes.forEach(gridBox => gridBox.removeEventListener('mouseenter', setBackgroundRandomColor));
+	 	// gridBoxes.forEach(gridBox => gridBox.addEventListener('click', addBlackBackgroundColor));
+
+    }
+
     // Add event listeners
-
     // Add clear grid event listener
-    let clear = document.getElementById('clear');
-    clear.addEventListener('click', clearGrid);
+    let reset = document.getElementById('reset');
+    reset.addEventListener('click', resetGrid);
        
     // Add custom grid event listener
     let customGrid = document.querySelector('#customGrid');
     customGrid.addEventListener('click', createCustomGrid);
 
+	// on page load activate black background color
+	let defaultBox = window.addEventListener('load', addBlackBackgroundColor);
 
-// let gridBoxes= document.querySelectorAll('.grid');
-let defaultBox = window.addEventListener('load', addBackground);
-
-// let gridBoxes= document.querySelectorAll('.grid');
-//     gridBoxes.forEach(gridBox => gridBox.addEventListener('click', addBackground));
-
-
-    // Add background event listener
-	let gridBoxes= document.querySelectorAll('.grid');
-    gridBoxes.forEach(gridBox => gridBox.addEventListener('click', addBackground));
 
     let blackColorGenerator = document.getElementById('blackColor');
     blackColorGenerator.addEventListener('click', addBlackBackgroundColor);
 
     // Add random color event listener
     let randomColorGenerator = document.getElementById('randomColor');
-    randomColorGenerator.addEventListener('click', addBackgroundRandomColor);
+    randomColorGenerator.addEventListener('click', addBackgroundBlackColorRandomColor);
  	
  	// Add erase event listener
     let eraser = document.getElementById('erase');
     eraser.addEventListener('click', eraseBackground);
  	
- 	/* Clear grid and reset to on click set background (this is not working) */
- 	function clearGrid (e) {
-		let gridBoxes= document.querySelectorAll('.grid');
-    	gridBoxes.forEach(gridBox => gridBox.classList.remove('background'));
-    	gridBoxes.forEach(gridBox => gridBox.removeAttribute('style')); 	
-    	gridBoxes.forEach(gridBox => gridBox.removeEventListener('mouseenter', setBackgroundRandomColor));
-	 	gridBoxes.forEach(gridBox => gridBox.removeEventListener('mousemove', addBackground));
-    }
-
+ 	
 
 
 </script>
