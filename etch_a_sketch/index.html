@@ -100,8 +100,9 @@
 	function addBackground (e) {
 	 	let gridBoxes= document.querySelectorAll('.grid');
 	 	gridBoxes.forEach(gridBox => gridBox.addEventListener('mouseenter', addBackground));
- 		
-		this.style.background = null;
+ 		gridBoxes.forEach(gridBox => gridBox.removeEventListener('click', addBackground));
+
+		// this.style.background = "black";
 		this.classList.add('background');
 
  		this.style.opacity = (parseFloat(this.style.opacity) || 0) + 0.2;
@@ -156,7 +157,11 @@
  		this.setAttribute('style', `background: ${randomColor};`)
  		this.style.opacity = (parseFloat(this.style.opacity) || 0) + 1;
  		let gridBoxes= document.querySelectorAll('.grid');
+ 		// remove click from add backgfound
+ 		gridBoxes.forEach(gridBox => gridBox.removeEventListener('click', addBackgroundRandomColor));
+ 		gridBoxes.forEach(gridBox => gridBox.removeEventListener('click', setBackgroundRandomColor));
     	gridBoxes.forEach(gridBox => gridBox.addEventListener('mouseenter', setBackgroundRandomColor));
+
  	}
 
     function addBackgroundRandomColor (e) {
@@ -189,15 +194,18 @@
     function eraseBackground () {
     	let grid = document.querySelector('.grid');
     	let gridBoxes = document.querySelectorAll('.grid');
-
+    	// Remove event listeners 
     	gridBoxes.forEach(gridBox => gridBox.removeEventListener('click', addBackground));
     	gridBoxes.forEach(gridBox => gridBox.removeEventListener('click', setBackgroundRandomColor));
     	gridBoxes.forEach(gridBox => gridBox.removeEventListener('mousemove', addBackground));
     	gridBoxes.forEach(gridBox => gridBox.removeEventListener('click', setBackgroundRandomColor));
     	gridBoxes.forEach(gridBox => gridBox.addEventListener('mousemove', eraseIt));
-
     }
 
+
+	// ['click','ontouchstart'].forEach( evt => 
+ //    element.addEventListener(evt, dosomething, false)
+	// );
     // Add event listeners
 
     // Add clear grid event listener
@@ -207,6 +215,14 @@
     // Add custom grid event listener
     let customGrid = document.querySelector('#customGrid');
     customGrid.addEventListener('click', createCustomGrid);
+
+
+// let gridBoxes= document.querySelectorAll('.grid');
+let defaultBox = window.addEventListener('load', addBackground);
+
+// let gridBoxes= document.querySelectorAll('.grid');
+//     gridBoxes.forEach(gridBox => gridBox.addEventListener('click', addBackground));
+
 
     // Add background event listener
 	let gridBoxes= document.querySelectorAll('.grid');
