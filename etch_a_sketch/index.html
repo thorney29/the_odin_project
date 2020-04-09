@@ -190,12 +190,9 @@
     }
 
     function eraseIt () {
-    	// this.classList.remove('background');
-    	// this.style.background = 'transparent';
- 		// this.removeAttribute('style', `background: ${randomColor};`)
-    	this.style.background = null;
+    	this.removeAttribute('style');
     	let gridBoxes = document.querySelectorAll('.grid');
-    	gridBoxes.forEach(gridBox => gridBox.addEventListener('click', eraseIt));
+    	// gridBoxes.forEach(gridBox => gridBox.addEventListener('click', eraseIt));
     }
  // erase 
     function eraseBackground () {
@@ -216,8 +213,6 @@
 
 	 	gridBoxes.forEach(gridBox => gridBox.removeEventListener('mouseenter', setBackgroundBlackColor));
     	gridBoxes.forEach(gridBox => gridBox.removeEventListener('mouseenter', setBackgroundRandomColor));
-	 	// gridBoxes.forEach(gridBox => gridBox.addEventListener('click', addBlackBackgroundColor));
-
     }
 
     // Add event listeners
@@ -231,7 +226,6 @@
 
 	// on page load activate black background color
 	let defaultBox = window.addEventListener('load', addBlackBackgroundColor);
-
 
     let blackColorGenerator = document.getElementById('blackColor');
     blackColorGenerator.addEventListener('click', addBlackBackgroundColor);

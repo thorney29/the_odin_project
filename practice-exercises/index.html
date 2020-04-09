@@ -1,7 +1,9 @@
  <!DOCTYPE html>
- <html>
+ <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
  <head>
-<title>Practice projects</title>	
+ <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+ <meta content="utf-8" http-equiv="encoding">
+ <title>Practice projects</title>	
  <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@700&display=swap" rel="stylesheet">
 <style>
 	 * {
@@ -22,6 +24,23 @@
 </head>
 <body>
 	<h1>Practice makes perfect</h1>
+	<h2>Objects!</h2>
+	<p>Write the code, one line for each action:</p>
+	<ul>
+		<li>Create an empty object user.</li>
+		<li>Add the property name with the value John.</li>
+		<li>Add the property surname with the value Smith.</li>
+		<li>Change the value of the name to Pete.</li>
+		<li>Remove the property name from the object.</li>
+	</ul>
+	<section id="createObject">
+	<p id="newObject"><!-- new obj goes here --></p>
+	<p>this is a true or false value:</p><p id="schedule"><!-- true/false goes here --></p>
+	<p>this is a sum of an object value:</p><p id="sum"><!-- object sum goes here --></p>
+	<p>if a number multiply by 2:</p><p id="multiplyByTwo"><!-- object multipy goes here --></p>
+</section>
+	<hr>
+
 <!--countdown that needs to delay for one second first  -->
 	<h2>Active learning: Launch countdown!</h2>
 	<p>In this exercise, we want you to print out a simple launch countdown to the output box, from 10 down to Blastoff. Specifically, we want you to:</p>
@@ -138,19 +157,73 @@
     </div>
   </div>
 <script>
-	const person1 = {
-	  name: 'Chris',
-	  greeting: function() {
-	    alert('Hi! I\'m ' + this.name + '.');
+
+	const person1 = {};
+	person1.name = "John";
+	person1.surname = "Smith";
+	delete person1.name;
+	const newObject = document.querySelector('#newObject');
+	for (key in person1) {
+			newObject.textContent += person1[key] + " ";
+	}
+
+	const schedulePara = document.querySelector('#schedule');
+	let schedule = {
+		// "8:30" : "get up",
+	};
+	// schedule["8:30"] = "get up";
+	for (key in schedule) {
+			schedulePara.textContent += schedule[key] + " ";
+	}
+	let trueOrFalse = '';
+	function isEmptyObj(obj) {
+		if(key in obj){
+			schedulePara.textContent = 'false: there are values in the obj';
+		} else {
+			schedulePara.textContent = 'true: it is empty';
+		}
+	}
+	isEmptyObj(schedule);
+	
+// Add the salaries together if salaries is not empty
+	let sumPara = document.querySelector('#sum');
+	let salaries = {
+	  John: 100,
+	  Ann: 160,
+	  Pete: 130
+	};
+	let sumNumbers = 0;
+	function addValues(o) {
+			for (let prop in o) {
+			sumPara.textContent = 'there are values in the object';
+				sumNumbers += o[prop];
+			}
+			sumPara.textContent = sumNumbers;
+
+		
+	};
+	addValues(salaries);
+
+	let menu = {
+    width: 200,
+    height: 300,
+    title: "My menu"
+	};
+
+
+	function multiplyNumeric(obj) {
+	for(let prop in obj) {
+	  if(typeof obj[prop] === 'number') {
+	    obj[prop] = obj[prop] * 2;
 	  }
 	}
 
-	const person2 = {
-	  name: 'Deepti',
-	  greeting: function() {
-	    alert('Hi! I\'m ' + this.name + '.');
-	  }
 	}
+
+	multiplyNumeric(menu);
+	let multiplyByTwoPara = document.querySelector('#multiplyByTwo');
+	multiplyByTwoPara.innerHTML = "menu width=" + menu.width + " height=" + menu.height + " title=" + menu.title;
+
 
 	// countdown
 	const output = document.querySelector('.output');
@@ -241,7 +314,7 @@
     let paraLoopPrime = document.createElement('p');
 	paraLoopPrime.classList.add('primeNumbers');
     let isPrimeSection = document.querySelector('#isPrime');
-    console.log(isPrimeSection)
+    // console.log(isPrimeSection)
 	isPrimeSection.appendChild(paraLoopPrime);
 
     function isPrime(num) {
@@ -265,7 +338,7 @@
 	}
  	let paraLoopPrimeContent = paraLoopPrime.textContent.slice(0, paraLoopPrime.textContent.length - 2)  + '.';
  	paraLoopPrime.textContent = paraLoopPrimeContent;
- 	console.log(paraLoopPrimeContent);
+ 	// console.log(paraLoopPrimeContent);
  	// isPrimeSection.appendChild(paraLoopPrimeContent);
 
  	// #2
@@ -290,7 +363,7 @@
 		if (name === phonebook[m].name) {
 			paraPhone.innerHTML = `<strong>${phonebook[m].name} : ${phonebook[m].number}</strong>`;
 		} else {
-			console.log(phonebook[m].name);
+			// console.log(phonebook[m].name);
 		}
 		m++;
 	} while (m < phonebook.length);
