@@ -28,6 +28,8 @@ const zero = document.querySelector('#zero');
 const period = document.querySelector('#period').addEventListener('click', inputToScreen);
 const equals = document.querySelector('#equals').addEventListener('click', compute);
 
+let valuesArray = [];
+
 // operations
 var operate =  {
    '+': function (x, y) { return x + y },
@@ -51,6 +53,7 @@ function togglePositiveNegative () {
       return Math.abs(screen.value)
     }
 }
+
 function togglePercentage () {
     if (screen.value > 0) {
       screen.value = screen.value / 100
@@ -67,13 +70,14 @@ function inputToScreen (period) {
     document.querySelector('#period').removeEventListener('click', inputToScreen);
   }
   strLength = screen.value.length;
-  console.log(typeof screen.value)
-  console.log(screen.value.length)
+  // console.log(typeof screen.value)
+  // console.log(screen.value.length)
   if (strLength > 9) {
     let number = screen.value
     number = Number(number)
     screen.value = number.toFixed(8) 
   }
+  opButtons.forEach(button => button.addEventListener('click', storeValue));
   youTyped.innerHTML = screen.value  
 
 }
@@ -81,9 +85,9 @@ function inputToScreen (period) {
 function storeValue () {
   screen.value += this.value;
   document.querySelector('#period').addEventListener('click', inputToScreen);
+  opButtons.forEach(button => button.removeEventListener('click', storeValue));
 }
 
-let valuesArray = [];
 
 function computeToArray () {
  let string = screen.value; 
@@ -170,6 +174,6 @@ function compute () {
     }
   }
   screen.value = result
-  youTyped.innerHTML = screenValueHistory + '=' + result
+  youTyped.innerHTML = screenValueHistory + ' = ' + result
   valuesArray = [];
 }
