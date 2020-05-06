@@ -2,8 +2,655 @@
 <html>
 <head>
 	<title>Pomodoro</title>
+<link href="https://fonts.googleapis.com/css2?family=Inconsolata&family=Overpass&display=swap" rel="stylesheet">
+
+	<style>
+		* {
+		 /* -webkit-user-select: none;
+		  -moz-user-select: moz-none;
+		  -ms-user-select: none;
+		  user-select: none;*/
+		  box-sizing: border-box;
+		}
+		body {
+			display: flex;
+			width: 90%;
+			margin:auto;
+			font-family: 'Overpass', sans-serif;
+		}
+		body>div {
+			width: 50%;
+		}
+		.stage {
+		  width: 245px;
+		  height: 310px;
+		  display: block;
+		  margin: 20px auto;
+		  -webkit-perspective: 1200px;
+		  perspective: 1200px;
+		  -webkit-perspective-origin: 50% 50%;
+		  perspective-origin: 50% 50%;
+		}
+		.egg {
+		  cursor: -webkit-grab; cursor: -moz-grab;
+		  overflow-x: scroll;
+		  overflow-y: hidden;
+		  display: inline-block;
+		  float: left;
+		  width: 100%;
+		  height: 100%;
+		  margin: 0;
+		  border-radius: 80% 80% 65% 65%;
+		  position: relative;
+		  background: radial-gradient(circle at 50% 120%, #9a8912, #c1951b 10%, #d3b82f 80%, #CECECE 100%);
+		}
+		.egg:before {
+		  content: "";
+		  position: fixed;
+		  top: 1%;
+		  left: 5%;
+		  width: 90%;
+		  height: 90%;
+		  border-radius: 50%;
+		  background: radial-gradient(circle at 50% 0px, #ffffff, rgba(255, 255, 255, 0) 58%);
+		  -webkit-filter: blur(5px);
+		  z-index: 2;
+		}
+		.egg .shadow {
+			bottom: 80px;
+			left: 50px;
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) 40%, rgba(0, 0, 0, 0) 50%);
+			transform: rotateX(75deg) translateZ(-210px);
+			z-index: -1;
+		}
+	
+		.triangle {
+		    position: fixed;
+		    width: 0;
+		    height: 0;
+		    border-bottom: 20px solid #323031;
+		    border-left: 10px solid transparent;
+		    border-right: 10px solid transparent;
+		    top: 224px;
+		    left: 0;
+			right: 0;
+			margin: 14px auto;
+		}
+		.line{
+		  	position: fixed;
+			width: 237px;
+			height: 50px;
+			border: solid 5px #000;
+			border-color: transparent #000 #000 #000;
+			border-radius: 150%/0 0 40px 40px;
+			border-style: hidden hidden groove hidden;
+			top: 165px;
+			left: -35px;
+		}
+		.timer {
+			font-family: inconsolata;
+			font-size: 18px;
+			display: inline-block;
+			text-indent: 8px;
+			position: relative;  
+			padding-top:85px;
+			height: 100px;
+			width: 100%;
+			white-space: nowrap;
+			top: 111px; 
+			right: 9px;
+		}
+
+		::-webkit-scrollbar { 
+		    display: none; 
+		}
+
+		.green {background:#7B7A4E; padding:10px;}
+		.yellow {background:#E7D072; padding:10px;}
+		.red {background: #C33329;padding:10px;}
+		#breakCount {
+			font-family: inconsolata;
+    		font-size: 2rem;
+		}
+	</style>
 </head>
 <body>
+	<div id="pomodoroInstructionsContainer">
+		<h1>Pomodoro Timer</h1>
+		<p><em>Pomodoro instructions and philosophy (source Wikipedia): </em></p>
+		<p>There are six steps in the original technique:</p>
+		<ol>
+			<li>Decide on the task to be done.</li>
+			<li>Set the pomodoro timer (traditionally to 25 minutes).</li>
+			<li>Work on the task.</li>
+			<li>End work when the timer rings and put a checkmark on a piece of paper.</li>
+			<li>If you have fewer than four checkmarks, take a short break (3–5 minutes), then go to step 2.</li>
+			<li>After four pomodoros, take a longer break (15–30 minutes), reset your checkmark count to zero, then go to step 1.</li>
+		</ol>
+		<p><em>For the purposes of the technique, a pomodoro is the interval of time spent working. 
+		</em></p>
+		<p><em>Regular breaks are taken, aiding assimilation. A short (3–5 minutes) rest separates consecutive pomodoros. Four pomodoros form a set. A longer (15–30 minute) rest is taken between sets.
+		</em></p>
+		<p><em>A goal of the technique is to reduce the impact of internal and external interruptions on focus and flow. A pomodoro is indivisible; when interrupted during a pomodoro, either the other activity must be recorded and postponed (using the inform – negotiate – schedule – call back strategy) or the pomodoro must be abandoned. </em></p>
+	</div>
+	<div id="pomodoroContainer">
+		<div id="timeRemainingIndicator">Time remaining: <span id="timeCountdown">0</span> </div>
+		<h1>Get Started!</h1>
+		<p>Set the timer the old fashion way (click and hold the timer to the number you'd like) or enter your time here to be more precise: 
+		<select style="width: 30%;" name="sessionDuration" id="sessionDuration">
+			<option value="25">25</option>			
+			<option value="20">20</option>
+			<option value="15">15</option>
+			<option value="10">10</option>
+			<option value="5">5</option>
 
+			<option value="1">1</option>
+		</select></p>
+		<!-- <input type="text" id="sessionDuration"> -->
+		<p>Set short break length: 
+		<button title="increase" class="shortbreakDurationAdd1">+</button>
+		<input type="number" id="shortbreakDuration" value="5">
+		<button title="decrease" class="shortbreakDurationSubtract1">-</button></p>
+		<p>Set long break length:
+		<button title="increase" class="longbreakDurationAdd1">+</button><input type="text" id="longbreakDuration" value="30"><button title="decrease" class="longbreakDurationSubtract1">-</button></p>
+		<p><button id="session">Start Pomodoro!</button></p>
+
+<!-- <section onclick = "testFunc()" class="stage"> -->
+  	<section class="stage">
+  		<figure  id = 'egg' class="egg">
+		      <div id = 'timer' class="timer"> | | 60 &nbsp  &nbsp &nbsp 0 | | | | 5 | | | | 10 | | | | 15 | | | | 20 | | | | 25 | | | | 30 | | | | 35 | | | | 40 | | | | 45 | | | | 50 | | | | 55 | | | | 60 &#8201  &#8201 &#8201 &#8201 0 | | |</div>
+		    <figure class="triangle"></figure>
+		    <figure class="line"></figure>
+		    <span class="shadow"></span>
+		</figure>
+	</section>
+	Completed Pomodoros<div id="breakCount">0</div>
+	<button id="reset">Reset</button>
+need a separate timer for break: start countdown
+
+	reset resets everything
+	stop resets session/break duration
+	pause stops the countdown until play 
+</div>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>
+var egg = document.getElementById("egg");
+var clickDown = 0;
+var curXPos = 0;
+var curDown = false; 
+var timer = "";
+var stage = document.querySelector('.stage');
+var sound1 = new Audio("http://hostinsomestuff.ucoz.site/_ld/0/1_timer_or_desk_b.mp3");
+// let sound2 =;
+let timeRemaining = document.querySelector('#timeRemainingIndicator');
+let time = document.querySelector('#timeCountdown');
+let breakCountValue = document.querySelector('#breakCount');
+let breakCount = Number(breakCountValue.textContent); 
+var milliseconds = 0;
+var millis = 0;
+var minutes = 0;
+var seconds = 0;
+
+//Mouse Move Listener
+stage.addEventListener('mousemove', setStage); 
+function setStage (e) {
+	if(curDown === true){ 
+	    if (curXPos >= 5 && clickDown + 5 < e.pageX) {
+			curXPos -=5;
+			clickDown +=5;
+			$('#egg').scrollLeft(curXPos);
+  			if (milliseconds > 60000) {
+			    milliseconds = curXPos / 18;
+        	} 
+        	milliseconds = milliseconds * 60000 
+   //      	console.log('top ' + curXPos);
+			// console.log('milliseconds ' + milliseconds);
+	      	// over 5 minutes
+	      	if(300000 < milliseconds) {
+		      	timeRemainingIndicator.classList.remove('yellow');
+		      	timeRemainingIndicator.classList.remove('red');
+		      	timeRemainingIndicator.classList.add('green');
+		      	// console.log('milliseconds green ' + milliseconds);
+		    }
+		    // at 5 minutes
+		    if(milliseconds <= 300000) {
+		      	timeRemainingIndicator.classList.remove('green');
+		      	timeRemainingIndicator.classList.remove('red');
+		       	timeRemainingIndicator.classList.add('yellow');
+		       	// console.log('milliseconds yellow ' + milliseconds); 
+		    }
+		    // under 1 minute
+			if(milliseconds <= 60000) { 
+				timeRemainingIndicator.classList.remove('green');
+		      	timeRemainingIndicator.classList.remove('yellow');
+		      	timeRemainingIndicator.classList.add('red');
+		      	// console.log('milliseconds red ' + milliseconds); 
+		    }
+	    } else if (curXPos <= 1180 && clickDown - 5 > e.pageX) {
+			curXPos += 5;
+			clickDown -= 5;
+			$('#egg').scrollLeft(curXPos);
+			// console.log('bottom ' + curXPos);
+			// console.log('milliseconds ' + milliseconds);
+          	if (milliseconds > 60000) {
+			    milliseconds = curXPos / 19;
+        	}
+ 			milliseconds = milliseconds * 60000
+			if(300000 < milliseconds) {
+		      	timeRemainingIndicator.classList.remove('yellow');
+		      	timeRemainingIndicator.classList.remove('red');
+		      	timeRemainingIndicator.classList.add('green');
+		    }
+		    if(milliseconds <= 300000) {
+		      	timeRemainingIndicator.classList.remove('green');
+		      	timeRemainingIndicator.classList.remove('red');
+		       	timeRemainingIndicator.classList.add('yellow'); 
+		    }
+			if(milliseconds <= 60000) { 
+				timeRemainingIndicator.classList.remove('green');
+		      	timeRemainingIndicator.classList.remove('yellow');
+		      	timeRemainingIndicator.classList.add('red'); 
+		    }
+	    } 
+	}
+}
+stage.addEventListener('mouseup', setTimer);
+function setTimer (e) {
+
+	console.log('Timer milliseconds ' + milliseconds);
+	curDown = false; 
+	//Timer begins here
+	timer = setInterval(function () {
+		if (curXPos) {
+			curXPos -= .315;
+			// console.log(curXPos)
+			$('#egg').scrollLeft(curXPos);	
+      		millis = milliseconds - 1000;
+	        milliseconds -= 1000;
+	        if(milliseconds > 0) {
+				minutes = Math.floor(millis / 60000);
+	  			seconds = ((millis % 60000) / 1000).toFixed(0);
+		        time.textContent = minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+			}
+			if(milliseconds === 0) { 
+				sound1.play(); //HERES THE AUDIO ALERT
+				time.textContent = 'BREAK!';
+				breakCount += 1;
+		    	breakCountValue.textContent = breakCount;
+				setShortBreakTimer(e);
+		     	if (breakCount === 4) {
+		    		setLongBreakTimer(e);
+		    	}
+		    	return time.textContent;
+	    	}
+     
+			 console.log('top/bottom ' + curXPos);
+			 console.log('milliseconds ' + milliseconds);
+			 // console.log('clickDown ' + clickDown);
+			 // milliseconds = curXPos / 18;
+		}
+    }, 1000); 
+}
+function setBreakTimer (e) {
+	curDown = false; 
+	//Timer begins here
+	timer = setInterval(function () {
+		if (curXPos) {
+			curXPos -= .315; 
+			$('#egg').scrollLeft(curXPos);	
+      		millis = milliseconds - 1000;
+	        milliseconds -= 1000;
+	        if(milliseconds > 0) {
+				minutes = Math.floor(millis / 60000);
+	  			seconds = ((millis % 60000) / 1000).toFixed(0);
+		        time.textContent = minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+			}
+			if(milliseconds === 0) { 
+				sound1.play(); //HERES THE AUDIO ALERT
+				time.textContent = 'BREAK!';
+				manualTimer(e);
+		    	return time.textContent;
+	    	}
+     
+			 console.log('top/bottom ' + curXPos);
+			 console.log('milliseconds ' + milliseconds);
+			 // console.log('clickDown ' + clickDown);
+			 // milliseconds = curXPos / 18;
+		}
+    }, 1000); 
+}
+function setShortBreakTimer (e) { 
+	let shortbreakValue = shortbreakDuration.value;
+	curDown = true; 
+  	clickDown = 0;  
+  	clearInterval(timer);
+    curXPos = (Number(shortbreakValue)) * 19;
+  	milliseconds = curXPos / 19;
+
+    setStage(e);
+	setBreakTimer(e);
+}
+function setLongBreakTimer (e) {
+	let longbreakValue = longbreakDuration.value;
+	curDown = true; 
+  	clickDown = 0;  
+  	clearInterval(timer);
+  	curXPos = (Number(longbreakValue)) * 19;
+  	milliseconds = curXPos / 19;
+  	setStage(e);
+	setBreakTimer(e);
+}
+//Mousedown and up listeners
+stage.addEventListener('mousedown', function (e) {
+  curDown = true; 
+  clickDown = e.pageX;  
+  clearInterval(timer);
+});
+
+//Prevents highlighting
+function stopDefAction(evt) {
+    evt.preventDefault();
+}
+function manualTimer (e) {
+	curDown = true; 
+  	clickDown = 0;  
+  	clearInterval(timer);
+	let timerValue = sessionDuration.value; 
+    curXPos = (Number(timerValue)) * 19;
+  	milliseconds = curXPos / 19;
+
+    setStage(e);
+    setTimer(e);
+}
+function resetAll () {
+ 	sessionDuration.value = 0;
+	shortbreakDuration.value = 0;
+	longbreakDuration.value = 0;
+	breakCountValue.textContent = 0;
+	time.textContent = 0;
+	curXPos = 0;
+	$('#egg').scrollLeft(curXPos);
+  	clearInterval(timer);
+}
+stage.addEventListener( 'mousedown', stopDefAction);
+session.addEventListener('click', manualTimer);	
+
+let sessionDuration = document.querySelector('#sessionDuration');
+let sessionButton = document.querySelector('#session');
+let shortbreakDuration = document.querySelector('#shortbreakDuration');
+let shortbreakDurationAdd1  = document.querySelector('.shortbreakDurationAdd1').addEventListener('click', function () {
+			shortbreakDuration.value = (Number(shortbreakDuration.value) + 1);
+});
+let shortbreakDurationSubtract1  = document.querySelector('.shortbreakDurationSubtract1').addEventListener('click', function () {
+			shortbreakDuration.value = (Number(shortbreakDuration.value) - 1);
+});
+let longbreakDuration = document.querySelector('#longbreakDuration');
+let longbreakDurationAdd1  = document.querySelector('.longbreakDurationAdd1').addEventListener('click', function () {
+			longbreakDuration.value = (Number(longbreakDuration.value) + 1);
+});
+let longbreakDurationSubtract1  = document.querySelector('.longbreakDurationSubtract1').addEventListener('click', function () {
+			longbreakDuration.value = (Number(longbreakDuration.value) - 1);
+});
+
+let reset = document.querySelector('#reset').addEventListener('click', resetAll);
+
+//Globals
+// var egg = document.getElementById("egg");
+// var clickDown = 0;
+// var curXPos = 0;
+// var curDown = false; 
+// var timer = "";
+// var stage = document.querySelector('.stage');
+// var sound1 = new Audio("http://hostinsomestuff.ucoz.site/_ld/0/1_timer_or_desk_b.mp3");
+// // let sound2 =;
+// let timeRemaining = document.querySelector('#timeRemainingIndicator');
+// let time = document.querySelector('#timeCountdown');
+// let breakCountValue = document.querySelector('#breakCount');
+// let breakCount = Number(breakCountValue.textContent); 
+// var milliseconds = 0;
+// var millis = 0;
+// var minutes = 0;
+// var seconds = 0;
+
+// //Mouse Move Listener
+// stage.addEventListener('mousemove', setStage); 
+// function setStage (e) {
+// 	if(curDown === true){
+// 	    if (curXPos >= 5 && clickDown + 5 < e.pageX) {
+// 			curXPos -=5;
+// 			clickDown +=5;
+// 			$('#egg').scrollLeft(curXPos);
+// 			milliseconds = curXPos / 18;
+
+// 			console.log('top ' + curXPos);
+// 			console.log('milliseconds ' + milliseconds);
+// 			console.log('clickDown ' + clickDown);
+// 			// if (curXPos === 20) {
+// 			// 	milliseconds = curXPos / 20
+// 			// } else if (curXPos <= 94){
+// 			// 	milliseconds = curXPos / 17.99
+// 			// } else if(90 < curXPos && curXPos <= 185) {   
+// 			// 	milliseconds = curXPos / 18.5
+// 			// } else if(185 < curXPos && curXPos <= 283) {   
+// 			// 	milliseconds = curXPos / 18.67
+// 			// } else if(283 < curXPos && curXPos <= 385) {   
+// 			// 	milliseconds = curXPos / 19.25
+// 			// } else if(385 < curXPos && curXPos <= 485) {   
+// 			// 	milliseconds = curXPos / 19.4
+// 			// } 
+
+// 	      	milliseconds = milliseconds * 60000 
+// 	      	// over 5 minutes
+// 	      	if(300000 < milliseconds) {
+// 		      	timeRemainingIndicator.classList.remove('yellow');
+// 		      	timeRemainingIndicator.classList.remove('red');
+// 		      	timeRemainingIndicator.classList.add('green');
+// 		      	console.log('milliseconds green ' + milliseconds);
+// 		    }
+// 		    // at 5 minutes
+// 		    if(milliseconds <= 300000) {
+// 		      	timeRemainingIndicator.classList.remove('green');
+// 		      	timeRemainingIndicator.classList.remove('red');
+// 		       	timeRemainingIndicator.classList.add('yellow');
+// 		       	console.log('milliseconds yellow ' + milliseconds); 
+// 		    }
+// 		    // under 1 minute
+// 			if(milliseconds <= 60000) { 
+// 				timeRemainingIndicator.classList.remove('green');
+// 		      	timeRemainingIndicator.classList.remove('yellow');
+// 		      	timeRemainingIndicator.classList.add('red');
+// 		      	console.log('milliseconds red ' + milliseconds); 
+// 		    }
+// 	    } else if (curXPos <= 1180 && clickDown - 5 > e.pageX) {
+// 			curXPos += 5;
+// 			clickDown -= 5;
+// 			$('#egg').scrollLeft(curXPos);
+// 			console.log('bottom ' + curXPos);
+// 			console.log('milliseconds ' + milliseconds);
+// 			console.log('clickDown ' + clickDown);
+// 			milliseconds = curXPos / 18;
+// 			if (curXPos <= 90){
+// 				milliseconds = curXPos / 18
+// 			} else if(90 < curXPos && curXPos <= 185) {   
+// 				milliseconds = curXPos / 18.5
+// 			} else if(185 < curXPos && curXPos <= 283) {   
+// 				milliseconds = curXPos / 18.67
+// 			} else if(283 < curXPos && curXPos <= 385) {   
+// 				milliseconds = curXPos / 19.25
+// 			} else if(385 < curXPos && curXPos <= 485) {   
+// 				milliseconds = curXPos / 19.4
+// 			} else {
+// 				milliseconds = curXPos / 19.5
+// 			}
+// 			milliseconds = milliseconds * 60000
+// 			if(300000 < milliseconds) {
+// 		      	timeRemainingIndicator.classList.remove('yellow');
+// 		      	timeRemainingIndicator.classList.remove('red');
+// 		      	timeRemainingIndicator.classList.add('green');
+// 		    }
+// 		    if(milliseconds <= 300000) {
+// 		      	timeRemainingIndicator.classList.remove('green');
+// 		      	timeRemainingIndicator.classList.remove('red');
+// 		       	timeRemainingIndicator.classList.add('yellow'); 
+// 		    }
+// 			if(milliseconds <= 60000) { 
+// 				timeRemainingIndicator.classList.remove('green');
+// 		      	timeRemainingIndicator.classList.remove('yellow');
+// 		      	timeRemainingIndicator.classList.add('red'); 
+// 		    }
+// 	    } 
+// 	}
+// }
+// stage.addEventListener('mouseup', setTimer);
+// function setTimer (e) {
+// 	curDown = false; 
+// 	//Timer begins here
+// 	timer = setInterval(function () {
+// 		if (curXPos >= -1) {
+// 			curXPos -= .315;
+// 			console.log(curXPos)
+// 			$('#egg').scrollLeft(curXPos);	
+// 			 if (-1<=curXPos && curXPos <=0) {
+// 				sound1.play(); //HERES THE AUDIO ALERT
+// 				breakCount += 1;
+// 		    	breakCountValue.textContent = breakCount;
+// 				setShortBreakTimer(e);
+// 		     	if (breakCount === 4) {
+// 		    		setLongBreakTimer(e);
+// 		    	}
+// 	        }
+// 			// time
+// 	       	let millis = milliseconds - 1000;
+// 	        milliseconds -= 1000;
+// 			minutes = Math.floor(millis / 60000);
+//   			seconds = ((millis % 60000) / 1000).toFixed(0);
+// 	        time.textContent = minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+// 	        if (-1 < minutes && minutes < 0) { 
+// 	        	time.textContent = 'BREAK!';
+// 	        	return time.textContent;
+//     	    }
+// 			console.log('top/bottom ' + clickDown + '/' + curXPos);
+// 			console.log('milliseconds ' + milliseconds);
+// 			console.log('clickDown ' + clickDown);
+// 			// milliseconds = curXPos / 18;
+// 		}
+//     }, 1000); 
+// }
+// function setBreakTimer (e) {
+// 	curDown = false; 
+// 	//Timer begins here
+// 	timer = setInterval(function () {
+// 		if (curXPos >= -1) {
+// 			curXPos -= .315;
+// 			$('#egg').scrollLeft(curXPos);	
+// 			 if (-1<=curXPos && curXPos <=0) {
+// 				sound1.play(); //HERES THE AUDIO ALERT
+// 				manualTimer(e);
+// 			}
+// 			// time
+// 	       	let millis = milliseconds - 1000;
+// 	        milliseconds -= 1000;
+// 			minutes = Math.floor(millis / 60000);
+//   			seconds = ((millis % 60000) / 1000).toFixed(0);
+// 	        time.textContent = minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+// 	        if (minutes < 0) { 
+// 	        	time.textContent = 'BREAK!';
+// 	        	return time.textContent;
+//     	    }
+// 		}
+//     }, 1000); 
+// }
+// function setShortBreakTimer (e) {
+// 	time.innerHTML = 'Time remaining: <span id="timeCountdown">0</span>';
+// 	let shortbreakValue = shortbreakDuration.value;
+// 	curDown = true; 
+//   	clickDown = 0;  
+//   	clearInterval(timer);
+//   	curXPos = shortbreakValue * 18;
+// 	setBreakTimer(e);
+// }
+// function setLongBreakTimer (e) {
+// 	let longbreakValue = longbreakDuration.value;
+// 	curDown = true; 
+//   	clickDown = 0;  
+//   	clearInterval(timer);
+//   	curXPos = longbreakValue * 18;
+// 	setBreakTimer(e);
+// }
+// //Mousedown and up listeners
+// stage.addEventListener('mousedown', function (e) {
+//   curDown = true; 
+//   clickDown = e.pageX;  
+//   clearInterval(timer);
+// });
+
+// //Prevents highlighting
+// function stopDefAction(evt) {
+//     evt.preventDefault();
+// }
+// function manualTimer (e) {
+// 	curDown = true; 
+//   	clickDown = 0;  
+//   	clearInterval(timer);
+// 	let timerValue = sessionDuration.value; 
+ 
+// 	if (timerValue === '25') {
+// 		curXPos = 490;
+// 	} else if (timerValue === '0') {
+// 		curXPos = 5;
+// 	} else if (timerValue === '5') {
+// 		curXPos = 95; 
+// 	} else if (timerValue === '10') {
+// 		curXPos = 190;
+// 		// clickDown = 850; 
+// 	} else if (timerValue === '15') {
+// 		curXPos = 295;
+// 	} else if (timerValue === '20') {
+// 		curXPos = 390;
+// 		console.log(timerValue);
+// 	} else if (timerValue === '30') {
+// 		curXPos = 585;
+// 	}  else if (timerValue === '1') {
+// 		curXPos = 25; 
+// 	} 
+// 	setStage(e);
+// 	setTimer(e);
+// }
+// function resetAll () {
+//  	sessionDuration.value = 0;
+// 	shortbreakDuration.value = 0;
+// 	longbreakDuration.value = 0;
+// 	breakCountValue.textContent = 0;
+// 	time.textContent = 0;
+// 	curXPos = 0;
+// 	$('#egg').scrollLeft(curXPos);
+//   	clearInterval(timer);
+// }
+// stage.addEventListener( 'mousedown', stopDefAction);
+// session.addEventListener('click', manualTimer);	
+
+// let sessionDuration = document.querySelector('#sessionDuration');
+// let sessionButton = document.querySelector('#session');
+// let shortbreakDuration = document.querySelector('#shortbreakDuration');
+// let shortbreakDurationAdd1  = document.querySelector('.shortbreakDurationAdd1').addEventListener('click', function () {
+// 			shortbreakDuration.value = (Number(shortbreakDuration.value) + 1);
+// });
+// let shortbreakDurationSubtract1  = document.querySelector('.shortbreakDurationSubtract1').addEventListener('click', function () {
+// 			shortbreakDuration.value = (Number(shortbreakDuration.value) - 1);
+// });
+// let longbreakDuration = document.querySelector('#longbreakDuration');
+// let longbreakDurationAdd1  = document.querySelector('.longbreakDurationAdd1').addEventListener('click', function () {
+// 			longbreakDuration.value = (Number(longbreakDuration.value) + 1);
+// });
+// let longbreakDurationSubtract1  = document.querySelector('.longbreakDurationSubtract1').addEventListener('click', function () {
+// 			longbreakDuration.value = (Number(longbreakDuration.value) - 1);
+// });
+
+// let reset = document.querySelector('#reset').addEventListener('click', resetAll);
+
+</script>
 </html>
