@@ -1,0 +1,110 @@
+* {
+ /* -webkit-user-select: none;
+  -moz-user-select: moz-none;
+  -ms-user-select: none;
+  user-select: none;*/
+  box-sizing: border-box;
+}
+body {
+	display: flex;
+	width: 90%;
+	margin:auto;
+	font-family: 'Overpass', sans-serif;
+}
+body>div {
+	width: 50%;
+}
+.stage {
+  width: 245px;
+  height: 310px;
+  display: block;
+  margin: 20px auto;
+  -webkit-perspective: 1200px;
+  perspective: 1200px;
+  -webkit-perspective-origin: 50% 50%;
+  perspective-origin: 50% 50%;
+}
+.egg {
+  cursor: -webkit-grab; cursor: -moz-grab;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  display: inline-block;
+  float: left;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  border-radius: 80% 80% 65% 65%;
+  position: relative;
+  background: radial-gradient(circle at 50% 120%, #9a8912, #c1951b 10%, #d3b82f 80%, #CECECE 100%);
+}
+.egg:before {
+  content: "";
+  position: fixed;
+  top: 1%;
+  left: 5%;
+  width: 90%;
+  height: 90%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 0px, #ffffff, rgba(255, 255, 255, 0) 58%);
+  -webkit-filter: blur(5px);
+  z-index: 2;
+}
+.egg .shadow {
+	bottom: 80px;
+	left: 50px;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) 40%, rgba(0, 0, 0, 0) 50%);
+	transform: rotateX(75deg) translateZ(-210px);
+	z-index: -1;
+}
+
+.triangle {
+    position: fixed;
+    width: 0;
+    height: 0;
+    border-bottom: 20px solid #323031;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    top: 224px;
+    left: 0;
+	right: 0;
+	margin: 14px auto;
+}
+.line{
+  	position: fixed;
+	width: 237px;
+	height: 50px;
+	border: solid 5px #000;
+	border-color: transparent #000 #000 #000;
+	border-radius: 150%/0 0 40px 40px;
+	border-style: hidden hidden groove hidden;
+	top: 165px;
+	left: -35px;
+}
+.timer {
+	font-family: inconsolata;
+	font-size: 18px;
+	display: inline-block;
+	text-indent: 8px;
+	position: relative;  
+	padding-top:85px;
+	height: 100px;
+	width: 100%;
+	white-space: nowrap;
+	top: 111px; 
+	right: 9px;
+}
+
+::-webkit-scrollbar { 
+    display: none; 
+}
+
+.green {background:#7B7A4E; padding:10px;}
+.yellow {background:#E7D072; padding:10px;}
+.red {background: #C33329;padding:10px;}
+#breakCount {
+	font-family: inconsolata;
+	font-size: 2rem;
+}
