@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My First Objects and their little prototypes</title>
+</head>
+<body>
+
+</body>
+
+<script>
+	function Book(title, author, numberofpages, readstatus) {
+	this.title = title
+	this.author = author
+	this.numberofpages = numberofpages
+	this.readstatus = readstatus
+	this.info = function () {
+		return title + ' by ' + author + ', ' + numberofpages + ' pages, ' + readstatus + ' yet'
+	}
+}
+const book = new Book('The Hobbit', 'J.R.R. Tolkien', '295', 'not read')
+console.log(book.info())
+</script>
+</html>

@@ -4,8 +4,8 @@ var curXPos = 0;
 var curDown = false; 
 var timer = "";
 var stage = document.querySelector('.stage');
-var sound1 = new Audio("http://hostinsomestuff.ucoz.site/_ld/0/1_timer_or_desk_b.mp3");
-// let sound2 =;
+var sound1 = new Audio("/assets/sounds/doorbell-5.wav");
+let sound2 = new Audio("/assets/sounds/Clock-ringing.mp3");
 let timeRemaining = document.querySelector('#timeRemainingIndicator');
 let time = document.querySelector('#timeCountdown');
 let breakCountValue = document.querySelector('#breakCount');
@@ -130,7 +130,7 @@ function setBreakTimer (e) {
 		        time.textContent = minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
 			}
 			if(milliseconds === 0) { 
-				sound1.play(); //HERES THE AUDIO ALERT
+				sound2.play(); //HERES THE AUDIO ALERT
 				time.textContent = 'BREAK!';
 				manualTimer(e);
 		    	return time.textContent;
