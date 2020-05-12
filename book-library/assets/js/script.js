@@ -1,6 +1,20 @@
 
-let myLibrary = [];
-let myLibraryArray = [];
+let myTempLibrary = [{	
+	title: "The Hobbit", 
+	author: "J.R.R. Tolkien",
+	numberofpages: "300",
+	readpreference: "",
+	readstatus: "checked"
+	},
+	{
+	title: "The Stand", 
+	author: "Stephen King",
+	numberofpages: "1100",
+	readpreference: "",
+	readstatus: "checked"
+	}];
+let myLibrary = myTempLibrary;
+console.log(myLibrary);
 let book = {};
 let title = '';
 let author = '';
@@ -32,29 +46,35 @@ if(localStorage.getItem('myLibrary')) {
 console.log(myLibrary);
 var render = function (template, node) {
 	if (!node) {return;}
+
 	if(myLibrary.length <= 0) {
 		template += 'There are no books in your library.';
 		node.innerHTML = template;
-		console.log('does this render?')
 	} else {
+		// if(myTempLibrary) {
+		// 	myTempLibrary.forEach((book, index) => {
+		// 		myLibrary.push(myTempLibrary[index])
+		// 		index++;
+		// 	})
+		// } 
 		let i = 0;
 		myLibrary.forEach((book) => {
 		    template +=`<div class="card" data-array-index="${i}"><h1 class="title">${book['title']}</h1>` +
 					  `<p><em>${book['author']}</em></p><p>Number of pages: <span class="pageNumbers">${book.numberofpages}`+
 					  `</span></p><div><input class="liketoread" type="checkbox" ${book.readpreference}><label for="">Would like to read</label></div>`+
 					  `<div><input class="haveread" type="checkbox" ${book.readstatus}><label for="">Have read book</label></div>`+
-					  `<button data-array-index="${i}" class="editButton">Edit</button><button data-array-index="${i}" class="removeButton">Remove</button></div>`;
+					  `<hr><p><button data-array-index="${i}" class="removeButton">Remove</button></p></div>`;
+					  // `<button data-array-index="${i}" class="editButton">Edit</button><button data-array-index="${i}" class="removeButton">Remove</button></div>`;
 			node.innerHTML = template;
-			let editButtons = document.querySelectorAll('.editButton')
-			editButtons.forEach(button => button.addEventListener('click', editThis));
+			let checkboxes = document.querySelectorAll('.card input[type="checkbox"]')
+			checkboxes.forEach(checkbox => checkbox.addEventListener('click', editThis));
 			let removeButtons = document.querySelectorAll('.removeButton')
-			removeButtons.forEach(button => button.addEventListener('click', removeThis));
-			console.log('does *this* render?')
+			removeButtons.forEach(button => button.addEventListener('click', removeThis));	
 			i++;
 		});
 	}	
 }
- render(template, displayLibrary);
+render(template, displayLibrary);
 // Create Book mother object
 function Book(title, author, numberofpages, readpreference, readstatus) {
 	this.title = title
@@ -73,14 +93,12 @@ function createNewBook () {
 	bookLikeToRead = document.querySelector('#bookLikeToRead').checked;
 	if(bookLikeToRead === true) {
 		bookLikeToRead = 'checked'
-		console.log(bookLikeToRead);
 	} else {
 		bookLikeToRead = ''
 	}
 	bookHaveRead = document.querySelector('#bookHaveRead').checked;
 	if(bookHaveRead === true) {
 		bookHaveRead = 'checked'
-		console.log(bookLikeToRead);
 	} else {
 		bookHaveRead = ''
 	}
@@ -93,28 +111,41 @@ function addBookToLibrary(e) {
 	myLibrary.reverse();
 	saveMyLibrary(); 
     render(template, displayLibrary);
+    form.classList.remove('show');
 }
 function saveMyLibrary () {
 	localStorage.setObj('myLibrary', myLibrary);
 }
-
-// function editThis (e) {
-// 	arrayIndex =  e.currentTarget.parentNode.getAttribute('data-array-index');
-// 	myLibrary.splice(arrayIndex, 1);
-// 	saveMyLibrary();
-// 	render(template, displayLibrary);
-// }
-
+function editThis (e) {
+	objectIndex = e.currentTarget.parentNode.parentNode.getAttribute('data-array-index');
+	if(e.currentTarget.classList.contains('liketoread')) {
+		bookLikeToRead = e.currentTarget;
+		console.log('bookLikeToRead = e.currentTarget;')
+		console.log(bookLikeToRead.checked)
+		if(bookLikeToRead.checked === true) {
+			myLibrary[objectIndex].readpreference = 'checked';
+		} else {
+			myLibrary[objectIndex].readpreference = ''
+		}
+	}
+	if(e.currentTarget.classList.contains('haveread')) {
+		haveread = e.currentTarget;
+		console.log('haveread = e.currentTarget;')
+		console.log(haveread.checked)
+		if(haveread.checked === true) {
+			console.log(myLibrary[objectIndex].haveread)
+			myLibrary[objectIndex].readstatus = 'checked';
+		} else {
+			myLibrary[objectIndex].readstatus = ''
+		}
+	}
+	saveMyLibrary();
+}
 function removeThis (e) {
 	arrayIndex =  e.currentTarget.parentNode.getAttribute('data-array-index');
 	myLibrary.splice(arrayIndex, 1);
 	saveMyLibrary();
 	render(template, displayLibrary);
 }
-
-
-// let removeButtons = document.querySelectorAll('.removeButton')
-// removeButtons.forEach(button => button.addEventListener('click', removeThis));
-
 let openAddNewBook = document.querySelector('#openAddNewBook').addEventListener('click', showAddBook);
 let addThisBookToLibrary = document.querySelector('#addNewBook').addEventListener('click', addBookToLibrary);

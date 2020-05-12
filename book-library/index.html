@@ -3,19 +3,23 @@
 <head>
  	<meta charset="utf-8">
     <title>Book Library</title>
-    <meta name="viewport" content="width=device-width"><link href="https://fonts.googleapis.com/css2?family=Inconsolata&family=Overpass&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width">
+    <link href="https://fonts.googleapis.com/css2?family=Eczar:wght@400;800&display=swap" rel="stylesheet">
+
 	<link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
 	<div id="main">
-		<button id="openAddNewBook">Add New Book</button>
+		<button id="openAddNewBook">Add A New Book</button>
 		<form id="book" action="">
-			<h2>Add Book to Your Library</h2>
+			<h2>Add A New Book To Your Library</h2>
 			<div><label for="bookTitle">Title: </label><input  id="bookTitle" type="text" name="bookTitle"></div> 
 			<div ><label for="bookAuthor">Author: </label><input id="bookAuthor" type="text" name="bookAuthor"></div>
 			<div><label for="bookNumberofPages">Number of Pages: </label><input id="bookNumberofPages" type="number" name="bookNumberofPages"></div> 
+			<div class="checkboxes">
 			<div><label for="bookLikeToRead">I'd like to read this.</label><input id="bookLikeToRead" type="checkbox" name="bookLikeToRead"></div>
 			<div><label for="bookHaveRead">I have read this.</label><input id="bookHaveRead" type="checkbox" name="bookHaveRead"></div>
+			</div>
 			<button id="addNewBook" type="submit">Add Book</button>
 		</form>
 	</div>
