@@ -1,0 +1,210 @@
+ <!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Tic Tac Toe</title>
+  <link href="https://fonts.googleapis.com/css2?family=Spartan:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" integrity="sha384-v8BU367qNbs/aIZIxuivaU55N5GPF89WBerHoGA4QTcbUjYiLQtKdrfXnqAcXyTv" crossorigin="anonymous">
+<style>
+	* {
+		margin:0;
+		padding:0;
+	}
+	body {
+		width:100%;
+		height:100%;
+		font-family: Arial, 'sans-serif';
+	}
+
+	.color-1 {color: #ff33a5;}
+	.bg-color-1 {background: #ff33a5;}
+	.color-2 {color: #6a832a;}
+	.bg-color-2 {background: #6a832a;}
+	.color-3 {color: #61123e;}
+	.bg-color-3 {background: #61123e;}
+	:hover.bg-color-3 {background: #e7008a;}
+	.color-4 {color: #DAF7A6;}
+	.color-5 {color: #FFC300;}
+	.color-6 {color: #FF5733;}
+	.color-7 {color: #e7008a;}
+	.bg-color-7 {
+		background: #e7008a;
+		color: white;
+		line-height: 180%;
+	}
+	:hover.bg-color-7 {
+		background: #61123e;
+	}
+	#gameFlow {
+		width: 30%;
+		margin: 8% auto;
+	}
+	.button {
+		/*colors: background pink and hover dark red*/
+		display: flex;
+		justify-content: center;
+		font-weight: 900;
+		letter-spacing: 1px;
+		margin: 2.8% auto;
+		text-transform: uppercase;
+		line-height: 55px;
+		width: 60%;
+	}
+	#playerSettings {
+		height: 100%;
+		margin-bottom: 8%;
+	}
+	#playerSettings form {
+		width: 30%;
+		margin:auto;
+		display: flex;
+		flex-flow: column nowrap;
+	}
+	#playerSettings label {
+		display: flex;
+		flex-flow:row nowrap;
+		line-height: 55px;
+	} 
+	#playerSettings input {
+		border:none;
+		border-bottom: 2px solid black;
+		font-size: 16px;
+		width:70%;
+		height: 45px;
+		margin-left: 2%;
+		outline:none;
+		padding-left:10px;
+	}
+	#playerSettings input[type="checkbox"] {
+		width:10%;
+	} 
+	#gameBoard {
+		padding:1em;
+		margin:8% auto;
+	}
+	#gameBoard table  {
+		height:100%;
+		width: 30%;
+		margin: 4% auto;
+		border-collapse: collapse;
+	}
+	#gameBoard tr {
+		width: 100%; 
+	}
+	#gameBoard td {
+		width: 30%;
+		height: 125px;
+		border: 3px solid black;
+		padding: 0;
+		margin: 0;
+	}
+	#gameBoard td:first-child,
+	#gameBoard td:last-child {
+		border-left:none;
+		border-right:none;
+	}
+	#gameBoard tr:nth-child(1) td {border-top: none;}
+
+	#gameBoard tr:nth-child(3) td {
+	    border-bottom: none;   
+	}
+	.svg-container {
+		display: flex;
+		align-items: center;
+		height: 100%;
+	}
+	svg {
+		margin: 0 auto;
+  		display: block;
+	}
+	.left {
+		border-right: 3px solid black;
+	}
+	.right {
+		border-left: 3px solid black;
+	}
+
+</style>
+</head>
+<body>
+	<div class="svg-container">
+	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+		<g>
+		<path fill="#e7008a" fill-opacity="1" d="M0,160L40,170.7C80,181,160,203,240,181.3C320,160,400,96,480,101.3C560,107,640,181,720,224C800,267,880,277,960,240C1040,203,1120,117,1200,117.3C1280,117,1360,203,1400,245.3L1440,288L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z"></path>
+		<text x="620" y="80" font-family="Verdana" font-size="35" fill="white">Tic Tac Toe</text>
+		</g>
+	</svg>
+	</div>
+	<section id="gameFlow">
+		<a class="button bg-color-3" style="color:white">start</a>
+		<a class="button bg-color-7" style="color:white">restart</a>
+	</section>
+	<section id="playerSettings" class="color-1">
+		<form action="" class="color-3">
+			<label class="color-4" for="player1">Player One:  <input name="player1" type="text" placeholder="name"></label>
+			<label class="color-5" for="player2">Player Two:  <input name="player2" type="text" placeholder="name"></label>
+			<label class="color-6" for="computer">Take me to the computer! <input name="computer" type="checkbox"></label>
+		</form>
+	</section>
+	<section id="gameBoard" class="bg-color-2">
+		<table>
+			<tbody>
+			<tr>
+				<td id="topLeft" class="top left">
+					<div class="svg-container">
+	 					<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="150" height="110">
+						  <circle stroke="#DAF7A6" fill="transparent" stroke-width="5" cy="55" r="50" cx="75"></circle>
+						</svg>
+					</div>
+				</td>
+				<td id="topCenter" class="top both">
+				<?xml version="1.0" standalone="no"?>
+				<div class="svg-container">
+					<svg width="200" height="250" version="1.1" xmlns="http://www.w3.org/2000/svg">
+						<g>
+						  	<line stroke="#DAF7A6" stroke-width="5" y1="80" y2="176.45" x1="50" x2="150"></line>
+							<line stroke="#DAF7A6" stroke-width="5" y1="80" y2="176.45" x2="50" x1="150"></line>
+						</g>
+					</svg>
+				</div>
+				</td>
+				<td id="topRight" class="top right"></td>
+			</tr>
+			<tr>
+				<td id="midLeft" class="left"></td>
+				<td id="midCenter" class="both">
+					<div class="svg-container">
+	 					<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="150" height="110">
+						  <circle stroke="#DAF7A6" fill="transparent" stroke-width="5" cy="55" r="50" cx="75"></circle>
+						</svg>
+					</div>
+				</div>
+				</td>
+				<td id="midRight" class="right"></td>
+			</tr>
+			<tr>
+				<td id="bottomLeft" class="bottom left"></td>
+				<td id="bottomCenter" class="bottom both">
+					<div class="svg-container">
+						<svg width="200" height="250" version="1.1" xmlns="http://www.w3.org/2000/svg">
+						<g>
+						  	<line stroke="#DAF7A6" stroke-width="5" y1="80" y2="176.45" x1="50" x2="150"></line>
+							<line stroke="#DAF7A6" stroke-width="5" y1="80" y2="176.45" x2="50" x1="150"></line>
+						</g>
+					</svg>
+				</div>
+			</td>
+				<td id="bottomRight" class="bottom right"><div class="svg-container">
+	 					<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="150" height="110">
+						  <circle stroke="#DAF7A6" fill="transparent" stroke-width="5" cy="55" r="50" cx="75"></circle>
+						</svg>
+					</div></td>
+			</tr>	
+			</tbody>
+		</table>
+	</section>
+	<script src="/js/gameBoard.js" type="text/javascript">
+	<script src="/js/gameFlow.js" type="text/javascript">
+	<script src="/js/players.js" type="text/javascript">
+</body>
+</html>
