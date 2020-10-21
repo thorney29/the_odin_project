@@ -1,30 +1,23 @@
-const gameBoard =  = (() => {
-  const add = (a, b) => a + b;
-  const sub = (a, b) => a - b;
-  const mul = (a, b) => a * b;
-  const div = (a, b) => a / b;
-  return {
-    add,
-    sub,
-    mul,
-    div,
-  };
-})();
+const gameBoard = (() => {
+  const getgameBoard = document.querySelectorAll('td');
+  const gameBoardValues = [];
+  // Get table cell IDs and store them in an array
+  // i don't know if i need this yet
+  // getgameBoard.forEach(gridBox => 
+  //   gameBoardValues.push(gridBox.getAttribute('id')) ); 
+  console.log(getgameBoard);
+  // console.log(gameBoardValues);
 
-Players
-// example one
-const playerOneName = "tim"
-const playerTwoName = "jenn"
-const playerOneMarker = "X"
-const playerTwoMarker = "O"
+  
+ 
+ getgameBoard.forEach(gridBox => gridBox.addEventListener('click', setMarker),{ once: true });
+  function setMarker (e) {
+    console.log(this.innerHTML);
+    if(this.innerHTML !== ''){
+      //do nothing
+    } else {
+      this.classList.add('markerX');  
+    }
+  }
 
-// example two
-const playerOne = {
-  name: "tim",
-  marker: "X"
-}
-
-const playerTwo = {
-  name: "jenn",
-  marker: "O"
-}
+})(); 
