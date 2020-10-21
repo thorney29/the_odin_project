@@ -1,3 +1,11 @@
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="150" height="110">
-						  <circle stroke="#DAF7A6" fill="transparent" stroke-width="5" cy="55" r="50" cx="75"></circle>
-						</svg>
+<svg width="110" height="105" xmlns="http://www.w3.org/2000/svg">
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="107" width="112" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <circle id="svg_1" cx="55" r="50" cy="52" stroke-width="5" fill="transparent" stroke="#DAF7A6"/>
+ </g>
+</svg>
