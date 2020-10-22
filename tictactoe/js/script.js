@@ -1,5 +1,5 @@
 // Player Factory 
-const player = (name, marker, isPlaying) => {
+let player = (name, marker, isPlaying) => {
   // let sayHello = () => alert('Get ready ' + name + "!");
   return { name, marker, isPlaying };
 }; 
@@ -10,6 +10,7 @@ const gameBoard = (() => {
 	let playerComputerName = "Computer";
 	playerOne = player(player1Name, "X", true);
 	playerTwo = player(player2Name, "O", true);
+	let currentPlayer = playerOne;
 	playerComputer = player(playerComputerName, "O", false);
  	document.getElementById("computerPlay").checked = false;
 	
@@ -90,44 +91,42 @@ const gameBoard = (() => {
 			// document.getElementsByTagName('head')[0].appendChild(style);		  
 	    } else { /*if there is nothing there, add an x if user clicks on box*/
 	      if (gameBoardBoxesPlayed.length % 2 === 0) {
-
   	      	this.classList.add('markerX'); 
   	      	gameBoardBoxesPlayer1.push(this.getAttribute('id'));
   	      	gameBoardBoxesPlayed.push(this.getAttribute('id'));
   		    if (playerComputer.isPlaying == true) {
   				updatePlayerComputer();
-  	      	} else {
-  	      	  	// changeTurn();
-  	      	}
-  	      	console.log(gameBoardBoxesPlayer1);
+  	      	}  
+  	      	changeTurn();
   	      } else {
   	      	this.classList.add('markerO');
 			gameBoardBoxesPlayer2.push(this.getAttribute('id'));
   	      	gameBoardBoxesPlayed.push(this.getAttribute('id')); 
-  	      	console.log(gameBoardBoxesPlayer2);
+  	      	changeTurn();
   	      }
 	    }
+	    if (gameBoardBoxesPlayed.length >= 5) {
+			console.log('lets check for a winner!');
+			winner();
+		}
 	}
 	let updatePlayerComputer = () => {
-		console.log("yow!");
 		if(gameBoardBoxesPlayed.length == 1){
 			// if player 1 takes any corner, computer goes into center
 			if(gameBoardBoxesPlayed.includes(topLeftMarker)    ||
 			   gameBoardBoxesPlayed.includes(topRightMarker)   ||
 			   gameBoardBoxesPlayed.includes(bottomLeftMarker) ||
 			   gameBoardBoxesPlayed.includes(bottomRightMarker)) {
-				middleCenter.classList.add('markerO');
-				gameBoardBoxesPlayed.push(middleCenter.getAttribute('id')); 
-
+					middleCenter.classList.add('markerO');
+					gameBoardBoxesPlayed.push(middleCenter.getAttribute('id')); 
 			} else if (gameBoardBoxesPlayed.includes(middleCenterMarker)) { /* if player 1 plays middle */
 				bottomRight.classList.add('markerO');
 				gameBoardBoxesPlayed.push(bottomRight.getAttribute('id')); 
 			}
 		} else if (gameBoardBoxesPlayed.length == 3) {
 			if(gameBoardBoxesPlayed.includes(topLeftMarker) && gameBoardBoxesPlayed.includes(bottomRightMarker)){
-					middleRight.classList.add('markerO');
-					gameBoardBoxesPlayed.push(middleRight.getAttribute('id')); 
-
+				middleRight.classList.add('markerO');
+				gameBoardBoxesPlayed.push(middleRight.getAttribute('id')); 
 			} else if(gameBoardBoxesPlayed.includes(topRightMarker) || gameBoardBoxesPlayed.includes(bottomLeftMarker)) { 
 				middleLeft.classList.add('markerO');
 				gameBoardBoxesPlayed.push(middleLeft.getAttribute('id')); 
@@ -150,43 +149,46 @@ const gameBoard = (() => {
 	}
 
 	const changeTurn = () => {
-		if (player === playerOne) {
-			player = playerTwo;
-		} else {
-			player = playerOne;
+		if (currentPlayer === playerOne) {
+			currentPlayer = playerTwo;
+ 		} else {
+			currentPlayer = playerOne;
 		}
 	};
-    function updatePlayerTwo() {
-		console.log("whooooo!");
 
-	// 	if(gameBoardBoxesPlayer1.length == 1){
-	// 		// if player 1 takes any corner, computer goes into center
-	// 		if(gameBoardBoxesPlayer1.includes(topLeftMarker)    ||
-	// 		   gameBoardBoxesPlayer1.includes(topRightMarker)   ||
-	// 		   gameBoardBoxesPlayer1.includes(bottomLeftMarker) ||
-	// 		   gameBoardBoxesPlayer1.includes(bottomRightMarker)) {
-	// 			middleCenter.classList.add('markerO');	
-	// 		} else if (gameBoardBoxesPlayer1.includes(middleCenterMarker)) { /* if player 1 plays middle */
-	// 			bottomRight.classList.add('markerO');
-	// 		}
-	// 	} else if (gameBoardBoxesPlayer1.length == 2) {
-	// 		if(gameBoardBoxesPlayer1.includes(topLeftMarker) && gameBoardBoxesPlayer1.includes(bottomRightMarker)){
-	// 				middleRight.classList.add('markerO');
-	// 		} else if(gameBoardBoxesPlayer1.includes(topRightMarker) || gameBoardBoxesPlayer1.includes(bottomLeftMarker)) { 
-	// 			middleLeft.classList.add('markerO');
-	// 		}	
-	// 	} else if (gameBoardBoxesPlayer1.length == 3) {
-	// 		if(gameBoardBoxesPlayer1.includes(middleLeftMarker)){
-	// 			bottomLeft.classList.add('markerO');
-	// 		} else {
-	// 			middleLeft.classList.add('markerO');
-	// 			alert("You snooze, you lose!");
-	// 		}
-	// 	} else if (gameBoardBoxesPlayer1.length == 3) {
-	// 		if(gameBoardBoxesPlayer1.includes(topRightMarker)){
-	// 			Top.classList.add('markerO');
-	// 		}
-	// 	}
+    
+    let winner = () => {
+		console.log("whooooo!");
+		let boardMarkers = document.querySelectorAll("#gameBoard td");
+		let gameBoardMarkerX = [];
+		let gameBoardMarkerO = [];
+		boardMarkers.forEach(function(box) {
+			if(box.classList.contains('markerX')) {
+				gameBoardMarkerX.push(box.getAttribute('id'));
+			} else if (box.classList.contains('markerO')) {
+				gameBoardMarkerO.push(box.getAttribute('id'));
+			}
+		})
+
+ 		 if ((gameBoardMarkerX[0]=="topLeft" && gameBoardMarkerX[1] == "topCenter" && gameBoardMarkerX[2]=="topRight")||
+		 	(gameBoardMarkerX[0]=="midLeft" && gameBoardMarkerX[1] == "midCenter" && gameBoardMarkerX[2]=="midRight")|| 
+		 	(gameBoardMarkerX[0]=="bottomLeft" && gameBoardMarkerX[1] == "bottomCenter" && gameBoardMarkerX[2]=="bottomRight") ||
+		 	(gameBoardMarkerX[0]=="topLeft" && gameBoardMarkerX[1] == "midLeft" && gameBoardMarkerX[2]=="bottomLeft")||
+		 	(gameBoardMarkerX[0]=="topCenter" && gameBoardMarkerX[1] == "midCenter" && gameBoardMarkerX[2]=="bottomCenter")||
+			(gameBoardMarkerX[0]=="topRight" && gameBoardMarkerX[1] == "midRight" && gameBoardMarkerX[2]=="bottomRight")||
+			(gameBoardMarkerX[0]=="topLeft" && gameBoardMarkerX[1] == "midCenter" && gameBoardMarkerX[2]=="bottomRight")||
+		 	(gameBoardMarkerX[0]=="topRight" && gameBoardMarkerX[1] == "midCenter" && gameBoardMarkerX[2]=="bottomLeft")) {
+		 		alert(playerOne.name + " wins!");
+		 } else if ((gameBoardMarkerO[0]=="topLeft" && gameBoardMarkerO[1] == "topCenter" && gameBoardMarkerO[2]=="topRight")||
+		 	(gameBoardMarkerO[0]=="midLeft" && gameBoardMarkerO[1] == "midCenter" && gameBoardMarkerO[2]=="midRight")|| 
+		 	(gameBoardMarkerO[0]=="bottomLeft" && gameBoardMarkerO[1] == "bottomCenter" && gameBoardMarkerO[2]=="bottomRight") ||
+		 	(gameBoardMarkerO[0]=="topLeft" && gameBoardMarkerO[1] == "midLeft" && gameBoardMarkerO[2]=="bottomLeft")||
+		 	(gameBoardMarkerO[0]=="topCenter" && gameBoardMarkerO[1] == "midCenter" && gameBoardMarkerO[2]=="bottomCenter")||
+			(gameBoardMarkerO[0]=="topRight" && gameBoardMarkerO[1] == "midRight" && gameBoardMarkerO[2]=="bottomRight")||
+			(gameBoardMarkerO[0]=="topLeft" && gameBoardMarkerO[1] == "midCenter" && gameBoardMarkerO[2]=="bottomRight")||
+		 	(gameBoardMarkerO[0]=="topRight" && gameBoardMarkerO[1] == "midCenter" && gameBoardMarkerO[2]=="bottomLeft")) {
+		 		alert(playerTwo.name + " wins!");
+		 }
 	}
  return {
 		updatePlayerComputer,
