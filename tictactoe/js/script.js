@@ -640,7 +640,6 @@ const gameBoard = (() => {
 				gameBoardMarkerO.push(box.getAttribute('id'));
 			}
 		})
-		console.log(gameBoardMarkerX);
 		for(let i = 0; gameBoardMarkerX.length > i; i++) {
  		 if ((gameBoardMarkerX.includes("topLeft") && gameBoardMarkerX.includes("topCenter") && gameBoardMarkerX.includes("topRight"))||
 		 	 (gameBoardMarkerX.includes("topLeft") && gameBoardMarkerX.includes("midLeft") && gameBoardMarkerX.includes("bottomLeft"))||
@@ -650,7 +649,6 @@ const gameBoard = (() => {
 			 (gameBoardMarkerX.includes("topRight") && gameBoardMarkerX.includes("midRight") && gameBoardMarkerX.includes("bottomRight"))||
 			 (gameBoardMarkerX.includes("topLeft") && gameBoardMarkerX.includes("midCenter") && gameBoardMarkerX.includes("bottomRight"))||
 			 (gameBoardMarkerX.includes("topRight") && gameBoardMarkerX.includes("midCenter") && gameBoardMarkerX.includes("bottomLeft"))) {
-		 		console.log(playerOne.name + " wins!"); 
 		 		document.getElementById('winningMessage').innerHTML = '<p style="font-size:140%; text-align:center;">Congratulations, ' + playerOne.name + '! You did it!</p>';
 		 		return;
 		 } else if ((gameBoardMarkerO.includes("topLeft") && gameBoardMarkerO.includes("topCenter") && gameBoardMarkerO.includes("topRight"))||
@@ -661,12 +659,9 @@ const gameBoard = (() => {
 			(gameBoardMarkerO.includes("topRight") && gameBoardMarkerO.includes("midRight") && gameBoardMarkerO.includes("bottomRight"))||
 			(gameBoardMarkerO.includes("topLeft") && gameBoardMarkerO.includes("midCenter") && gameBoardMarkerO.includes("bottomRight"))||
 		 	(gameBoardMarkerO.includes("topRight") && gameBoardMarkerO.includes("midCenter") && gameBoardMarkerO.includes("bottomLeft"))) {
-		 		console.log(playerTwo.name + " wins!");
 		 		document.getElementById('winningMessage').innerHTML = '<p style="font-size:140%; text-align:center;">Congratulations, ' + playerTwo.name + '! You did it!</p>';
 		 		return;
 		 } else if (gameBoardMarkerO.length == 4){
-		 			 		console.log(playerTwo.name + " didn't wins!");
-
 		 	document.getElementById('winningMessage').innerHTML = '<p style="font-size:140%; text-align:center;">It was a draw, but you are both winners in my eye!</p>';
 		 }
 		}
