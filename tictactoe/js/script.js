@@ -1,6 +1,5 @@
 // Player Factory 
 let player = (name, marker, isPlaying) => {
-  // let sayHello = () => alert('Get ready ' + name + "!");
   return { name, marker, isPlaying };
 }; 
  
@@ -55,7 +54,8 @@ const gameBoard = (() => {
 
 
 		return {playerOne, playerTwo, playerComputer};
-	}   
+	}
+
 	let updatePlayerDisplay = () => {
 		let player1Updated =  document.getElementById("player1_name_updated");
 		let player2Updated =  document.getElementById("player2_name_updated");
@@ -66,7 +66,6 @@ const gameBoard = (() => {
 		document.getElementById("player2_container").style.display = "block";
 		document.getElementById("player2").style.display = "block";
 		document.getElementById("getPlayer2").style.display = "flex";
-
 	}
 
 	let player1 = document.getElementById("getPlayer1").addEventListener("click", updatePlayer);
@@ -82,13 +81,10 @@ const gameBoard = (() => {
 	function setMarker (e) {
 	  	if (currentPlayer === playerOne && playerComputer.isPlaying === true) {
   	      	this.classList.add('markerX');
-  	      	console.log("plays made by me");  
   	      	gameBoardBoxesPlayer1.push(this.getAttribute('id'));
 
-  	      	console.log(gameBoardBoxesPlayer1); 
   	      	gameBoardBoxesPlayed.push(this.getAttribute('id'));
   		    if (playerComputer.isPlaying == true) {
-  		    	console.log("plays made by computer");
   				updatePlayerComputer();
   				changeTurn();
   	      	} 	
@@ -108,6 +104,7 @@ const gameBoard = (() => {
 			winner();
 		}
 	}
+
 	let setComputerMarkerO = (location) => {
 		setTimeout(function () {
             location.classList.add('markerO');
@@ -115,6 +112,7 @@ const gameBoard = (() => {
     	}, 1000);
 	}
 
+	// On a path of folly 
 	let updatePlayerComputer = () => {
 	    // get current board
 		let boardMarkers = document.querySelectorAll("#gameBoard td");
@@ -615,8 +613,6 @@ const gameBoard = (() => {
 			currentPlayer = playerOne;
 		}
 	};
-	
-
 
  	let newGame = (player1_name_updated) => {
 	    let gameBoardBoxesPlayed = [];
@@ -675,7 +671,7 @@ const gameBoard = (() => {
 		 }
 		}
 	}
- return {
+ 	return {
 		updatePlayerComputer,
 		player,
 		playerOne,
