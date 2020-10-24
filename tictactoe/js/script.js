@@ -44,12 +44,13 @@ const gameBoard = (() => {
 				document.getElementById("player2").style.display = "none";
 				document.getElementById("getPlayer2").style.display = "none";
 			    document.getElementById("computerPlayContainer").style.display = "none";
+	    		let newGameButton = document.getElementById('newGame');
+	    		let startButton = document.getElementById('start');
+	     	    newGameButton.style.display = "flex";
+	     	    startButton.style.display = "none";
 			}
 		 }
-		let newGameButton = document.getElementById('newGame');
-		let startButton = document.getElementById('start');
- 	    newGameButton.style.display = "flex";
- 	    startButton.style.display = "none";
+
  	    newGameButton.addEventListener("click", newGame);
 
 		return {playerOne, playerTwo, playerComputer};
