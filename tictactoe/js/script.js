@@ -48,7 +48,7 @@ const gameBoard = (() => {
 	    		let startButton = document.getElementById('start');
 	     	    newGameButton.style.display = "flex";
 	     	    startButton.style.display = "none";
-	     	    
+
  	    newGameButton.addEventListener("click", newGame);
 			}
 		 }
@@ -624,7 +624,7 @@ const gameBoard = (() => {
 		let gameBoardBoxesPlayer2 = [];
 		playerOne.name = "Player 1";
 		playerTwo.name = "Player 2";
-		
+		document.getElementById('winningMessage').innerHTML =  "";
 		let clearBoard = document.querySelectorAll('#gameBoard td');
 		clearBoard.forEach(marker => marker.removeAttribute('class')); 
 		updatePlayerDisplay();
@@ -654,7 +654,8 @@ const gameBoard = (() => {
 			 (gameBoardMarkerX.includes("topRight") && gameBoardMarkerX.includes("midRight") && gameBoardMarkerX.includes("bottomRight"))||
 			 (gameBoardMarkerX.includes("topLeft") && gameBoardMarkerX.includes("midCenter") && gameBoardMarkerX.includes("bottomRight"))||
 			 (gameBoardMarkerX.includes("topRight") && gameBoardMarkerX.includes("midCenter") && gameBoardMarkerX.includes("bottomLeft"))) {
-		 		alert(playerOne.name + " wins!"); 
+		 		console.log(playerOne.name + " wins!"); 
+		 		document.getElementById('winningMessage').innerHTML = '<p style="font-size:140%; text-align:center;">Congratulations, ' + playerOne.name + '! You did it!</p>';
 		 		return;
 		 } else if ((gameBoardMarkerO.includes("topLeft") && gameBoardMarkerO.includes("topCenter") && gameBoardMarkerO.includes("topRight"))||
 		 	(gameBoardMarkerO.includes("midLeft") && gameBoardMarkerO.includes("midCenter") && gameBoardMarkerO.includes("midRight"))|| 
@@ -664,10 +665,13 @@ const gameBoard = (() => {
 			(gameBoardMarkerO.includes("topRight") && gameBoardMarkerO.includes("midRight") && gameBoardMarkerO.includes("bottomRight"))||
 			(gameBoardMarkerO.includes("topLeft") && gameBoardMarkerO.includes("midCenter") && gameBoardMarkerO.includes("bottomRight"))||
 		 	(gameBoardMarkerO.includes("topRight") && gameBoardMarkerO.includes("midCenter") && gameBoardMarkerO.includes("bottomLeft"))) {
-		 		alert(playerTwo.name + " wins!");
+		 		console.log(playerTwo.name + " wins!");
+		 		document.getElementById('winningMessage').innerHTML = '<p style="font-size:140%; text-align:center;">Congratulations, ' + playerTwo.name + '! You did it!</p>';
 		 		return;
-		 } else if (gameBoardMarkerX.length + gameBoardMarkerO.length == 8){
-		 	alert("You are both equal.");
+		 } else if (gameBoardMarkerO.length == 4){
+		 			 		console.log(playerTwo.name + " didn't wins!");
+
+		 	document.getElementById('winningMessage').innerHTML = '<p style="font-size:140%; text-align:center;">It was a draw, but you are both winners in my eye!</p>';
 		 }
 		}
 	}
