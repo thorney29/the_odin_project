@@ -644,32 +644,28 @@ const gameBoard = (() => {
 		})
 		console.log(gameBoardMarkerX);
 		for(let i = 0; gameBoardMarkerX.length > i; i++) {
- 		 if ((gameBoardMarkerX[i]=="topLeft" && gameBoardMarkerX[i+1] == "topCenter" && gameBoardMarkerX[i+2]=="topRight")||
-		 	(gameBoardMarkerX[i]=="midLeft" && gameBoardMarkerX[i+1] == "midCenter" && gameBoardMarkerX[i+2]=="midRight")|| 
-		 	(gameBoardMarkerX[i]=="bottomLeft" && gameBoardMarkerX[i+1] == "bottomCenter" && gameBoardMarkerX[i+2]=="bottomRight") ||
-		 	(gameBoardMarkerX[i]=="topLeft" && gameBoardMarkerX[i+1] == "midLeft" && gameBoardMarkerX[i+2]=="bottomLeft")||
-		 	(gameBoardMarkerX[i]=="topCenter" && gameBoardMarkerX[i+1] == "midCenter" && gameBoardMarkerX[i+2]=="bottomCenter")||
-			(gameBoardMarkerX[i]=="topRight" && gameBoardMarkerX[i+1] == "midRight" && gameBoardMarkerX[i+2]=="bottomRight")||
-			(gameBoardMarkerX[i]=="topLeft" && gameBoardMarkerX[i+1] == "midCenter" && gameBoardMarkerX[i+2]=="bottomRight")||
-		 	(gameBoardMarkerX[i]=="topRight" && gameBoardMarkerX[i+1] == "midCenter" && gameBoardMarkerX[i+2]=="bottomLeft")) {
-		 		alert(playerOne.name + " wins!");
-		 		// newGame();
-		 		console.log(player + " also known as " + currentPlayer.name + " wins!");
-		 } else if ((gameBoardMarkerO[0]=="topLeft" && gameBoardMarkerO[i+1] == "topCenter" && gameBoardMarkerO[i+2]=="topRight")||
-		 	(gameBoardMarkerO[i]=="midLeft" && gameBoardMarkerO[i+1] == "midCenter" && gameBoardMarkerO[i+2]=="midRight")|| 
-		 	(gameBoardMarkerO[i]=="bottomLeft" && gameBoardMarkerO[i+1] == "bottomCenter" && gameBoardMarkerO[i+2]=="bottomRight") ||
-		 	(gameBoardMarkerO[i]=="topLeft" && gameBoardMarkerO[i+1] == "midLeft" && gameBoardMarkerO[i+2]=="bottomLeft")||
-		 	(gameBoardMarkerO[i]=="topCenter" && gameBoardMarkerO[i+1] == "midCenter" && gameBoardMarkerO[i+2]=="bottomCenter")||
-			(gameBoardMarkerO[i]=="topRight" && gameBoardMarkerO[i+1] == "midRight" && gameBoardMarkerO[i+2]=="bottomRight")||
-			(gameBoardMarkerO[i]=="topLeft" && gameBoardMarkerO[i+1] == "midCenter" && gameBoardMarkerO[i+2]=="bottomRight")||
-		 	(gameBoardMarkerO[i]=="topRight" && gameBoardMarkerO[i+1] == "midCenter" && gameBoardMarkerO[i+2]=="bottomLeft")) {
+ 		 if ((gameBoardMarkerX.includes("topLeft") && gameBoardMarkerX.includes("topCenter") && gameBoardMarkerX.includes("topRight"))||
+		 	 (gameBoardMarkerX.includes("topLeft") && gameBoardMarkerX.includes("midLeft") && gameBoardMarkerX.includes("bottomLeft"))||
+			 (gameBoardMarkerX.includes("midLeft") && gameBoardMarkerX.includes("midCenter") && gameBoardMarkerX.includes("midRight"))|| 
+		 	 (gameBoardMarkerX.includes("bottomLeft") && gameBoardMarkerX.includes("bottomCenter") && gameBoardMarkerX.includes("bottomRight"))||
+		 	 (gameBoardMarkerX.includes("topCenter") && gameBoardMarkerX.includes("midCenter") && gameBoardMarkerX.includes("bottomCenter"))||
+			 (gameBoardMarkerX.includes("topRight") && gameBoardMarkerX.includes("midRight") && gameBoardMarkerX.includes("bottomRight"))||
+			 (gameBoardMarkerX.includes("topLeft") && gameBoardMarkerX.includes("midCenter") && gameBoardMarkerX.includes("bottomRight"))||
+			 (gameBoardMarkerX.includes("topRight") && gameBoardMarkerX.includes("midCenter") && gameBoardMarkerX.includes("bottomLeft"))) {
+		 		alert(playerOne.name + " wins!"); 
+		 		return;
+		 } else if ((gameBoardMarkerO.includes("topLeft") && gameBoardMarkerO.includes("topCenter") && gameBoardMarkerO.includes("topRight"))||
+		 	(gameBoardMarkerO.includes("midLeft") && gameBoardMarkerO.includes("midCenter") && gameBoardMarkerO.includes("midRight"))|| 
+		 	(gameBoardMarkerO.includes("bottomLeft") && gameBoardMarkerO.includes("bottomCenter") && gameBoardMarkerO.includes("bottomRight")) ||
+		 	(gameBoardMarkerO.includes("topLeft") && gameBoardMarkerO.includes("midLeft") && gameBoardMarkerO.includes("bottomLeft"))||
+		 	(gameBoardMarkerO.includes("topCenter") && gameBoardMarkerO.includes("midCenter") && gameBoardMarkerO.includes("bottomCenter"))||
+			(gameBoardMarkerO.includes("topRight") && gameBoardMarkerO.includes("midRight") && gameBoardMarkerO.includes("bottomRight"))||
+			(gameBoardMarkerO.includes("topLeft") && gameBoardMarkerO.includes("midCenter") && gameBoardMarkerO.includes("bottomRight"))||
+		 	(gameBoardMarkerO.includes("topRight") && gameBoardMarkerO.includes("midCenter") && gameBoardMarkerO.includes("bottomLeft"))) {
 		 		alert(playerTwo.name + " wins!");
-		 		console.log(player + " also known as " + currentPlayer.name + " wins!");
-		 		newGame();
-		 } else if (gameBoardMarkerX.length == 5){
-		 	//nothing to see here
-		 	console.log("I think this was a draw!");
-		 	// newGame();
+		 		return;
+		 } else if (gameBoardMarkerX.length + gameBoardMarkerO.length == 8){
+		 	alert("You are both equal.");
 		 }
 		}
 	}
