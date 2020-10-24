@@ -48,10 +48,11 @@ const gameBoard = (() => {
 	    		let startButton = document.getElementById('start');
 	     	    newGameButton.style.display = "flex";
 	     	    startButton.style.display = "none";
+	     	    
+ 	    newGameButton.addEventListener("click", newGame);
 			}
 		 }
 
- 	    newGameButton.addEventListener("click", newGame);
 
 		return {playerOne, playerTwo, playerComputer};
 	}   
