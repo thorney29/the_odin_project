@@ -1,0 +1,103 @@
+body {
+	font-family: 'Eczar', serif;
+	font-style:normal;
+}
+#main {
+	width:100%;
+}
+#displayLibrary {
+	background: #f5f5f5;
+	width: 85%;
+	margin:auto;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+}
+.card {
+	height: 300px;
+	min-width:24%;
+	max-width: 31.333%;
+	padding: 40px 20px;
+	background: white;
+	border: 1px solid turquoise;
+	margin:1%;
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	text-align: center;
+}
+.card div {
+	display:flex;
+	flex-flow:row nowrap;
+	justify-content: center;
+}
+.card input {
+	width: 12%;
+	margin: 0;
+} 
+form {
+	width: 46%;
+	margin: auto;
+	border: 1px solid #ccc;
+	background: white;
+	padding: 20px;
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	display: none;
+}
+.show {display:block;}
+
+input {
+	height: 30px;
+	width:100%;
+	margin: 1% 0;
+}
+form .checkboxes{
+	display: flex;
+	flex-flow:row nowrap;
+}
+form .checkboxes div {
+	display: flex;
+	margin: 2% auto;
+}	
+form .checkboxes input {
+	height: 29px;
+	width:29px;
+	margin: 0 0 0  4px;
+}
+#openAddNewBook,
+#addNewBook {
+	border-radius: 4px;
+	display: table;
+	height: 45px;
+	width:45%;
+	background: #24b2b9;
+	border: 1px solid #24b2b9;
+	margin: 3% auto;	
+	font-size: 1.6rem;
+	text-transform: uppercase;
+}
+#openAddNewBook:hover,
+#addNewBook:hover {
+	background: #126468;
+	color: white;
+}
+.removeButton {
+    background: #ccc;
+    border: 1px solid #ccc;
+    padding: .625em .825em;
+    width: 45%;
+	text-transform: uppercase;
+}
+.removeButton:hover {
+   	background: tomato;
+    border: 1px solid tomato;
+}
+hr {
+	color: #126468;
+	border-top: 1px dashed #126468;
+	width: 65%;
+	margin: 1.8em auto .825em;
+	border-bottom: 1px dashed #126468;
+}

@@ -1,0 +1,170 @@
+
+	* {
+		margin:0;
+		padding:0;
+	}
+	body {
+		width:100%;
+		height:100%;
+		font-family: Arial, 'sans-serif';
+	}
+	header {
+		background: url(../svg/header-bg.svg) no-repeat;
+		background-size: 100%;
+		height:300px;
+	}
+	.color-1 {color: #ff33a5;}
+	.bg-color-1 {background: #ff33a5;}
+	.color-2 {color: #6a832a;}
+	.bg-color-2 {background: #6a832a;}
+	
+	.color-3 {color: #1dd2b0;}
+	.bg-color-3 {background: #1dd2b0;}
+	:hover.bg-color-3 {background: #6a832a;}
+	
+	.color-4 {color: #DAF7A6;}
+	.bg-color-4 {
+		background: #DAF7A6;
+	}
+	.color-5 {color: #FFC300;}
+	.bg-color-5 {
+		background: #FFC300;
+	}
+	:hover.bg-color-5 {background: #FF5733;}
+
+	.color-6 {color: #FF5733;}
+	.bg-color-6 {background: #FF5733;}
+	.color-7 {color: #e7008a;}
+	.bg-color-7 {
+		background: #e7008a;
+		color: white;
+		line-height: 180%;
+	}
+	:hover.bg-color-7 {
+		background: #61123e;
+	}
+	.color-8 {color: #61123e;}
+	:hover.bg-color-8 {background: #e7008a;}
+	
+	#gameFlow {
+		width: 30%;
+		margin: 8% auto;
+	}
+	
+	#newGame {display:none;}
+
+	.button {
+		/*colors: background pink and hover dark red*/
+		display: flex;
+		justify-content: center;
+		font-weight: 900;
+		letter-spacing: 1px;
+		margin: 2.8% auto;
+		text-transform: uppercase;
+		line-height: 55px;
+		width: 60%;
+	}
+	#playerSettings {
+		height: 100%;
+		margin-bottom: 8%;
+	}
+	#playerSettings form {
+		width: 30%;
+		margin:auto;
+		display: flex;
+		flex-flow: column nowrap;
+	}
+	#playerSettings label {
+		display: flex;
+		flex-flow:row nowrap;
+		line-height: 55px;
+	} 
+	#playerSettings input {
+		border:none;
+		border-bottom: 2px solid black;
+		font-size: 16px;
+		width:70%;
+		height: 45px;
+		margin-left: 2%;
+		outline:none;
+		padding-left:10px;
+	}
+	#playerSettings input[type="checkbox"] {
+		width:10%;
+	} 
+	#gameBoard {
+		padding:1em;
+		margin:8% auto;
+	}
+	.table-container {margin:auto;width: 58%;}
+	
+	#gameBoard table  {
+		height:100%;
+		width: 100%;
+		margin: 4% auto;
+		border-collapse: collapse;
+	}
+	#gameBoard tr {
+		width: 100%; 
+	}
+	#gameBoard td {
+		width: 200px;
+		height: 200px;
+		border: 3px solid black;
+		padding: 0;
+		margin: 0;		
+		background-position: center;
+		opacity: .6;
+		transition:1s;
+	}
+	#gameBoard td:first-child,
+	#gameBoard td:last-child {
+		border-left:none;
+		border-right:none;
+	}
+	#gameBoard tr:nth-child(1) td {border-top: none;}
+
+	#gameBoard tr:nth-child(3) td {
+	    border-bottom: none;   
+	}
+
+	#gameBoard td.markerX {
+		background: url(../svg/x.svg) no-repeat;
+		background-position: center;
+		opacity: 1;
+	}
+	#gameBoard td.markerO {
+		background: url(../svg/circle.svg) no-repeat;
+		background-position: center;
+		opacity: 1;
+	}
+	.svg-container {
+		display: flex;
+		align-items: center;
+		height: 100%;
+	}
+	svg {
+		margin: 0 auto;
+  		display: block;
+	}
+	.left {
+		border-right: 3px solid black;
+	}
+	.right {
+		border-left: 3px solid black;
+	}
+
+	form a {text-decoration:none;color:black;font-size:12px;}
+
+	@media (max-width: 736px) {
+		#playerSettings form {
+			width: 80%;
+		}
+		.table-container {margin:auto;width: 78%;}
+
+		#gameBoard td {
+			width:150px;
+			height: 105px;
+			background-size: 60%;
+		}
+	}

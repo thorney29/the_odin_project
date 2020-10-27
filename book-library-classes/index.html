@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 	<meta charset="utf-8">
+    <title>Book Library</title>
+    <meta name="viewport" content="width=device-width">
+    <link href="https://fonts.googleapis.com/css2?family=Eczar:wght@400;800&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="./assets/css/style.css">
+	<style type="text/css">
+	
+	</style>
+</head>
+<body>
+	<div id="main">
+		<button id="openAddNewBook">Add A New Book</button>
+		<form id="book" action="">
+			<h2>Add A New Book To Your Library</h2>
+			<div><label for="bookTitle">Title: </label><input  id="bookTitle" type="text" name="bookTitle"></div> 
+			<div ><label for="bookAuthor">Author: </label><input id="bookAuthor" type="text" name="bookAuthor"></div>
+			<div><label for="bookNumbero◊fPages">Number of Pages: </label><input id="bookNumberofPages" type="number" name="bookNumberofPages"></div> 
+			<div class="checkboxes">
+			<div><label for="bookLikeToRead">I'd like to read this.</label><input id="bookLikeToRead" type="checkbox" name="bookLikeToRead"></div>
+			<div><label for="bookHaveRead">I have read this.</label><input id="bookHaveRead" type="checkbox" name="bookHaveRead"></div>
+			</div>
+			<button id="addNewBook" type="submit">Add Book</button>
+		</form>
+	</div>
+		<div id="displayLibrary">There are no books in your library.</div>
+		<!--Add a button on each book’s display to remove the book from the library. You will need to associate your DOM elements with the actual book objects in some way. One easy solution is giving them a data-attribute that corresponds to the index of the library array.
+
+		Add a button on each book’s display to change its read status.
+		To facilitate this you will want to create the function that toggles a book’s read status on your Book prototype instance. -->
+	</div>
+</body>
+<script src="./assets/js/script.js"></script>
+</html>

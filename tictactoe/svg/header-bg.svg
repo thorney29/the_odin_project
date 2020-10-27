@@ -1,0 +1,13 @@
+<svg width="1440" height="320" xmlns="http://www.w3.org/2000/svg">
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="602" width="802" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <g id="svg_1">
+   <path id="svg_2" d="m0,160l40,10.7c40,10.3 120,32.3 200,10.6c80,-21.3 160,-85.3 240,-80c80,5.7 160,79.7 240,122.7c80,43 160,53 240,16c80,-37 160,-123 240,-122.7c80,-0.3 160,85.7 200,128l40,42.7l0,-288l-40,0c-40,0 -120,0 -200,0c-80,0 -160,0 -240,0c-80,0 -160,0 -240,0c-80,0 -160,0 -240,0c-80,0 -160,0 -240,0c-80,0 -160,0 -200,0l-40,0l0,160z" fill="#e7008a"/>
+   <text id="svg_3" fill="white" font-size="35" font-family="Verdana" y="80" x="620">Tic Tac Toe</text>
+  </g>
+ </g>
+</svg>

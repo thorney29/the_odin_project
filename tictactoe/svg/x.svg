@@ -1,0 +1,14 @@
+<svg width="105" height="105" xmlns="http://www.w3.org/2000/svg">
+
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="107" width="107" y="-1" x="-1"/>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <g id="svg_1">
+   <line id="svg_2" x2="103" x1="3" y2="100.225" y1="3.775" stroke-width="5" stroke="#DAF7A6"/>
+   <line id="svg_3" x1="103" x2="3" y2="100.225" y1="3.775" stroke-width="5" stroke="#DAF7A6"/>
+  </g>
+ </g>
+</svg>
