@@ -34,7 +34,6 @@ Storage.prototype.setObj = function(key, obj) {
 Storage.prototype.getObj = function(key) {
     return (this.getItem(key))
 }
-
 if(localStorage.getItem('myLibrary')) {
 	try {
 		myLibrary = JSON.parse(localStorage.getItem('myLibrary'));
@@ -42,7 +41,6 @@ if(localStorage.getItem('myLibrary')) {
 		localStorage.removeItem('myLibrary')
 	}
 }
-
 console.log(myLibrary);
 var render = function (template, node) {
 	if (!node) {return;}
