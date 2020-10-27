@@ -29,7 +29,7 @@ function addBookToLibrary(e) {
 
 
 function createNewBook() {
-	title = document.querySelector('#bookTitle').value;
+	booktitle = document.querySelector('#bookTitle').value;
 	author = document.querySelector('#bookAuthor').value;
 	bookNumberofPages = document.querySelector('#bookNumberofPages').value;
 	bookLikeToRead = document.querySelector('#bookLikeToRead').checked;
@@ -44,7 +44,7 @@ function createNewBook() {
 	} else {
 		bookHaveRead = ''
 	}
-	book = new Book(title, author, bookNumberofPages, bookLikeToRead, bookHaveRead);
+	book = new Book(booktitle, author, bookNumberofPages, bookLikeToRead, bookHaveRead);
 }
 
 
@@ -86,12 +86,12 @@ const book1 = new Book("The Hobbit","J.R.R. Tolkien",300,"","checked");
 const book2 = new Book( "The Stand","Stephen King",1000,"",true);
 let myTempLibrary = [book1, book2];
 let myLibrary = myTempLibrary;
-let book = {};
-let title = '';
-let author = '';
-let bookNumberofPages = 0;
-let bookLikeToRead = '';
-let bookHaveRead = '';
+// let book = {};
+// let title = '';
+// let author = '';
+// let bookNumberofPages = 0;
+// let bookLikeToRead = '';
+// let bookHaveRead = '';
 
 let template = '';
 let arrayIndex = '';
