@@ -8,6 +8,8 @@ body {
    	padding-top: 50px;
    	line-height: 1.4;
    	font-size: 1.4em;
+   	margin: 0;
+	padding: 0px 0px;
 }
 
 #set-page {order:1;}
@@ -27,7 +29,7 @@ header {
 	padding: .5rem;
 	text-align: center;
 	font-size: 1.2rem;
-	background-color: #333333;
+	background-color: #6b751d;
 	color: #d9d9d9;
 	align-items: center;
 	order: 2;
@@ -51,9 +53,12 @@ header img {
 		text-align: center;
 		font-style: italic;
 }
+
 #menu {order: 3;}
-
-
+#set-page ul,
+#menu ul  {
+	padding: 0;
+}
 #menu ul {
 	display:flex;
 	justify-content: center;
@@ -61,15 +66,48 @@ header img {
    	max-width: 650px;
    	margin: auto;
 }
+
+#set-page ul {
+	margin: 2% auto; 
+}
+
 #set-page li,
 #menu li {
 	clear: both;
 	position: relative;
    	margin: 0 auto; 
+   	background: white;
+	border-left: #a8b72b solid 6.4px;
+}
+#menu li {
+	background: none;
+	padding: .24em .625em;
+}
+#set-page li {
+	float: left;
+	background: transparent;
+	height: 65px;
+	line-height: 65px;
+	font-size: 16px;
+	width: 216.667px;
+	text-transform: uppercase;
+	letter-spacing: .245px;
+	transition: .5s;
+	border: none;
 }
 
-#menu li {
-	float: left;
+#set-page li.current,
+#set-page li:hover {
+
+    text-decoration:none;
+    /*background: white;*/
+    font-size: 28px;
+	letter-spacing: 4px;
+	cursor: pointer;
+}
+
+#set-page li.current { 
+	transition: 0;
 }
 
 #menu li {
@@ -115,4 +153,17 @@ form input[type="submit"] {
 	color:white;
 	padding:.625em;
 	margin:auto;
+}
+
+footer { 
+	display:flex;
+	flex-flow: row nowrap;
+	order: 4;
+	background: rgb(2,0,36);
+	background: linear-gradient(338deg, rgba(2,0,36,1) 0%, rgba(168,183,43,1) 0%, rgba(107,117,29,1) 44%, rgba(168,183,43,1) 73%, rgba(107,117,29,1) 100%); 
+}
+footer section {
+	width: 46%;
+	margin:2%;
+	color: white;
 }
