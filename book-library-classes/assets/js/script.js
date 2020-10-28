@@ -83,7 +83,7 @@ function removeThis (e) {
 }
 
 const book1 = new Book("The Hobbit","J.R.R. Tolkien",300,"","checked");
-const book2 = new Book( "The Stand","Stephen King",1000,"",true);
+const book2 = new Book( "The Stand","Stephen King",1000,"","checked");
 let myTempLibrary = [book1, book2];
 let myLibrary = myTempLibrary;
 // let book = {};
@@ -126,7 +126,7 @@ var render = function (template, node) {
 	} else {
 		for (let p = 0; p < myLibrary.length; p++) {
 			template +=`<div class="card" data-array-index="${p}"><h1 class="title">${myLibrary[p].booktitle}</h1>` +
-					  `<p><em>${myLibrary[p]['author']}</em></p><p>Number of pages: <span class="pageNumbers">${myLibrary[p].numberofpages}`+
+					  `<p><em>${myLibrary[p].author}</em></p><p>Number of pages: <span class="pageNumbers">${myLibrary[p].numberofpages}`+
 					  `</span></p><div><input class="liketoread" type="checkbox" ${myLibrary[p].readpreference}><label for="">Would like to read</label></div>`+
 					  `<div><input class="haveread" type="checkbox" ${myLibrary[p].readstatus}><label for="">Have read book</label></div>`+
 					  `<hr><p><button data-array-index="${p}" class="removeButton">Remove</button></p></div>`;
