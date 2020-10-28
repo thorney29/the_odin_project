@@ -125,7 +125,6 @@ var render = function (template, node) {
 		node.innerHTML = template;
 	} else {
 		for (let p = 0; p < myLibrary.length; p++) {
-			console.log(myLibrary[p].synopsis);
 			template +=`<div class="card" data-array-index="${p}"><h1 class="title">${myLibrary[p].booktitle}</h1>` +
 					  `<p><em>${myLibrary[p]['author']}</em></p><p>Number of pages: <span class="pageNumbers">${myLibrary[p].numberofpages}`+
 					  `</span></p><div><input class="liketoread" type="checkbox" ${myLibrary[p].readpreference}><label for="">Would like to read</label></div>`+
