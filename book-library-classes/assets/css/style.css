@@ -32,8 +32,8 @@ body {
 	justify-content: center;
 }
 .card input {
-	width: 12%;
-	margin: 0;
+	width: 15px;
+    margin: 0 8px 0;
 } 
 form {
 	width: 46%;
@@ -49,7 +49,7 @@ form {
 .show {display:block;}
 
 input {
-	height: 30px;
+	height: 23px;
 	width:100%;
 	margin: 1% 0;
 }
