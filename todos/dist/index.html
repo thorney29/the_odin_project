@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>ToDoIt</title>
+        <link rel="stylesheet" href="./style.css">
+        <link rel="author" href="humans.txt">
+        <link href="https://fonts.googleapis.com/css2?family=Josefin+Slab:wght@700&family=Raleway&display=swap" rel="stylesheet">
+
+    </head>
+    <body>
+<div class="area" >
+    	<header>
+    		<h1>TO DO IT</h1>
+    		<div class="tagline">Create, update, complete your to do list</div>
+    	</header>
+        <div id="content">
+        	<div id="createToDoItem">
+        		<p class="form-title">Create New TO DO Item</p>
+        		<form action="" onsubmit="return false">
+        			<label>TITLE: <input type="text" name="title" id="title" value="this is a title"></label>
+        			<label>DESCRIPTION:<textarea name="description" id="description">what is the description</textarea></label>
+        			<label>DATE:<input type="date" name="date" id="dueDate" value="dueDate"></label>
+        			<label>PRIORITY:	<select id="priority">
+					        				<option value="high">
+					        				High
+					        				</option>
+					        				<option value="normal">
+					        				Normal
+					        				</option>
+					        				<option value="low">
+					        				Low
+					        				</option>
+        								</select>
+        			</label>
+        			<label>NOTES:<textarea name="notes" id="notes">these are some notes</textarea></label>
+                    <label>Checklist:<input name="checklist" id="checklist" value="no check"></label>
+        			<div class="formActions">
+        				<button id="saveItem" class="button">Save</button>
+        				<button id="editItem">Edit</button>
+        			</div>
+        		</form>
+        	</div>
+
+        	<div id="projectfolders"></div>
+        	<div id="projectList"></div>
+        </div>
+
+
+        <ul class="circles">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+        </ul>
+    </div>
+        <script src="main.js"></script>
+    </body>
+</html>
