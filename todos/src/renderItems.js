@@ -1,7 +1,4 @@
-let render = function (template, node, array) {
-	 // template = template;
-	 // node = node;
-	 // array  = array;
+let render = function (template, node) {
         if (!node) {return;}
 
         if(array.length <= 0) {
