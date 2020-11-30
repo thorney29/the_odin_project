@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0px;
     padding: 0px;
  }
@@ -22,7 +22,6 @@ header{
 }
 #mainTaskBar {
     height:100%;
-
     width: 300px;
     background: #482038;
     color: white;
@@ -39,14 +38,14 @@ header{
     flex-flow: column nowrap;
 }
 
-#viewAllProjectFolders,
-#viewTodayProjectFolder {
+li{
     width:100%;
-    text-align: center;
-    border-bottom: white solid 1px;
+    text-align: left;
     height: 100%;
     box-sizing: border-box;
+    padding: 10px 0 10px 20px;
 }
+
 #projectList {
     max-width: 1024px;
     width: 100%;
@@ -54,14 +53,22 @@ header{
     display: flex;
     flex-flow:row wrap;
 }
+
 #projectList.hide {
     display: none;
+}
+#projectList li {
+    padding: 10px 0 10px 10px;
 }
 .card {
     background: white;
     padding: 20px;
     width:auto;
     margin:1%;
+}
+.projectSection {
+    display: flex;
+
 }
 /* TO DO LIST CREATE NEW*/
 #createNewSection {
@@ -75,14 +82,16 @@ header{
 #showCreateNew {
     text-align: center;
 }
-#createToDoItem{
+#createNewProject,
+#createNewTask{
     width: 100%;
     background:rgba(206,97,116,.38);
     margin: auto;
     padding: 20px;
     display: none;
 }
-#createToDoItem.display {
+#createNewProject.display,
+#createNewTask.display {
     display: block;
 }
 #dynamicContent {
@@ -157,14 +166,34 @@ button {
     border: 1px solid white;
     color:white;
 }
-
+#projectList button {
+    width: auto;
+    height: 30px;
+    border: none;
+    margin: 0;
+    padding: 0px 20px;
+}
+#projectList li {
+    cursor: pointer;
+}
 button:hover {
  background-color: #fff;
   color: black;
   border: 1px solid black;
 }
 
-
+.tasks {
+    text-align: center;
+    margin: 2% auto;
+}
+.hide {display:none;}
+.close {
+    font-size: 1.8em;
+    float: right;
+    margin: 0 0 10px auto;
+    cursor: pointer;
+}
+/* this is the decorative animated background */
 .context {
     width: 100%;
     position: absolute;

@@ -17,43 +17,68 @@
     		<div class="tagline">Create, update, complete your to do list</div>
     	</header>
         <div id="content">
-            <div id="createNewSection">
-                    <div id="showCreateNewFolder"> <i class="fas fa-plus"></i> Create New Project</div>
-                    <div id="showCreateNewTask"> <i class="fas fa-plus"></i> Create New Task</div>
-            </div>
+           
             <section class="projectSection">
                 <aside id="mainTaskBar"> 
-                	<div id="viewAllProjectFolders">View All Tasks</div>
-                    <div id="viewTodayProjectFolder">View Today's Tasks</div>  
-                </aside>
+                     <!-- <div id="createNewSection"> </div> -->
+                    <ul>
+                        <li class="showCreateNewTask" title="Create a new task">New Task <i class="fas fa-plus"></i> </li>
+                        <li id="viewAllTasksFolders"> View All Tasks</li>
+                        <li class="viewTodayTasksFolder">View Today's Tasks</li>
+                        <li id="showCreateNewProject">Create New Project <i class="fas fa-plus"></i></li>
+                        <li id="viewAllProjectFolders">Projects</li>
+                    </ul>
+             
+                <div id="dynamicProjects">
+                    <ul id="projectList" style="padding-left: 40px;width: auto;">
+                     <!-- <li></li> -->
+                    </ul>
+                </div>
+                   </aside>
                 <div id="dynamicContent">
-                    <div id="projectList"></div>
-                        <div id="createToDoItem">
-                            <p class="form-title">Create New TO DO Item</p>
-                            <form action="" onsubmit="return false">
-                                <label>TITLE: <input type="text" name="title" id="title"></label>
-                                <label>DESCRIPTION:<textarea name="description" id="description"></textarea></label>
-                                <label>DATE:<input type="date" name="date" id="dueDate" ></label>
-                                <label>PRIORITY:    <select id="priority">
-                                                        <option value="high">
-                                                        High
-                                                        </option>
-                                                        <option value="normal">
-                                                        Normal
-                                                        </option>
-                                                        <option value="low">
-                                                        Low
-                                                        </option>
-                                                    </select>
-                                </label>
-                                <label>NOTES:<textarea name="notes" id="notes"></textarea></label>
-                                <label>Checklist:<input name="checklist" id="checklist"></label>
-                                <div class="formActions">
-                                    <button id="saveItem" class="button">Save</button>
-                                    <button id="editItem">Edit</button>
-                                </div>
-                            </form>
-                        </div>
+                  <!-- Tasks displayed here -->
+                    <div class="viewTodayTasksFolder" style="font-size: 24px;margin:auto;text-align: center;"><h2 id="taskTitle">Today's Tasks</h2></div>
+                    <div id="taskList"></div>
+                    <!-- Create New Project Form -->
+                    <div id="createNewProject">
+                         <p class="form-title">Create New Project</p>
+                         <form action="" onsubmit="return false">
+                            <div data-close="project" class="close"><i class="far fa-times-circle"></i></div>
+                             <label>Project Name: <input type="text" name="projectName" id="projectName"></label>
+                             <div class="formActions">
+                                <button id="saveProject" class="button"><i class="far fa-save"></i></button>
+                                <button id="editProject"><i class="far fa-edit"></i></button>
+                             </div>
+                        </form>
+                    </div>
+                     <!-- Create New Task Form -->
+                    <div id="createNewTask" >
+                        <p class="form-title">Create New Task</p>
+                        <form action="" onsubmit="return false">
+                            <div data-close="task" class="close"><i class="far fa-times-circle"></i></div>
+                            <label>TITLE: <input type="text" name="title" id="title"></label>
+                            <label>DESCRIPTION:<textarea name="description" id="description"></textarea></label>
+                            <label>DATE:<input type="date" name="date" id="dueDate" ></label>
+                            <label>PRIORITY:    <select id="priority">
+                                                    <option value="high">
+                                                    High
+                                                    </option>
+                                                    <option value="normal">
+                                                    Normal
+                                                    </option>
+                                                    <option value="low">
+                                                    Low
+                                                    </option>
+                                                </select>
+                            </label>
+                            <label>NOTES:<textarea name="notes" id="notes"></textarea></label>
+                            <label>ADD TO PROJECT:<input name="project" id="project"></label>
+                            <div class="formActions">
+                                <button id="saveTask" class="button"><i class="far fa-save"></i></button>
+                                <button id="editItem"><i class="far fa-edit"></i></button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </section>
         </div>

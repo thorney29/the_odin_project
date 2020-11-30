@@ -7,17 +7,35 @@ Storage.prototype.getObj = function(key) {
 
 let loadItems = (() => {
     /* Get from local storage */
-    let savedProjectFolder = [];
-    let projectFolder = [];
-    
-    if(localStorage.getItem('projectFolder', projectFolder)) {
-        try {
-            projectFolder = JSON.parse(localStorage.getItem('projectFolder'));
-        } catch(e) {
-            localStorage.removeItem('projectFolder')
-        }
+    function loadProject () {
+        let projectFolder = [];
+         if(localStorage.getItem('projectFolder', projectFolder)) {
+            try {
+                projectFolder = JSON.parse(localStorage.getItem('projectFolder'));
+                console.log("did the get item from loaditems work?");
+
+            } catch(e) {
+                localStorage.removeItem('projectFolder')
+            }
+        } 
+        return { projectFolder };
     }
-    savedProjectFolder = projectFolder;
+    function loadTask () {
+        let taskFolder = [];
+        if(localStorage.getItem('taskFolder', taskFolder)) {
+                try {
+                    taskFolder = JSON.parse(localStorage.getItem('taskFolder'));
+                    console.log("did the get item from loaditems work?");
+                } catch(e) {
+                    localStorage.removeItem('taskFolder');
+                    console.log("didit not work?");
+                }
+        } 
+        return { taskFolder };
+    }
+    loadProject();
+    loadTask();
+    
 })();
 
-export default loadItems;
+export default {loadItems};
