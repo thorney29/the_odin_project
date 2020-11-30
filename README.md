@@ -11,5 +11,6 @@ The Odin Project: Completed project assignments
 <h2><a href="https://thorney29.github.io/the_odin_project/book-library-classes/index.html">Book Library-Classes</a></h2>
 <h2><a href="https://thorney29.github.io/the_odin_project/tictactoe/index.html">TicTacToe</a></h2>
 <h2><a href="https://thorney29.github.io/the_odin_project/restaurant/dist/index.html">Restaurant</a></h2>
+<h2><a href="https://thorney29.github.io/the_odin_project/todos/dist/index.html">To Do It</a></h2>
 
 
