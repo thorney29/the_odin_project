@@ -11,8 +11,21 @@ h1, h2, h3, h4, h5, h6 {
     font-family: 'Josefin Slab', serif;
 }
 header{
-    height: 100px;
-    padding: 20px;
+    /*height: 100px;
+    padding: 20px;*/
+    height: 380px;
+    width: 50%;
+    background: #ffffff2e;
+    box-shadow: 1px 2px 1px #26262652;
+    position: absolute;
+}   
+header h1,
+header .tagline {
+    color:white;
+}
+.projectSection {
+    display: flex;
+    margin: 100px 0 0 0;
 }
 #content {
     position: relative;
@@ -23,12 +36,18 @@ header{
 #mainTaskBar {
     height:100%;
     width: 300px;
-    background: #482038;
+    background: #331515;
     color: white;
     display:flex;
-
     flex-flow:column wrap;
-   /* font-size: 32px;*/
+    padding:20px;
+}
+#mainTaskBar hr {
+    width: 68%;
+    margin:7% auto;
+}
+#mainTaskBar li {
+    list-style-type: none;
 }
 #viewAllProjectFolders,
 #viewTodayProjectFolder,
@@ -54,21 +73,130 @@ li{
     flex-flow:row wrap;
 }
 
-#projectList.hide {
-    display: none;
-}
 #projectList li {
     padding: 10px 0 10px 10px;
+    cursor: pointer;
 }
-.card {
-    background: white;
-    padding: 20px;
-    width:auto;
-    margin:1%;
-}
-.projectSection {
-    display: flex;
+button {
 
+/*button.editTaskButton {*/
+    max-width: 21%;
+    max-height: 70px;
+    min-width: 19%;
+    min-height: 70px;
+/*}*/
+border-radius: 50%;
+    border: none;
+    margin: 1%;
+    background: #0be1cd;
+    background-color: rgb(11, 225, 205);
+    border: 1px solid white;
+    color: black;
+    background-color: #e9ff50;
+    color: black;
+    border: 1px solid #bce32c;
+}
+#projectList button {
+    max-width: 25%;
+    max-height: 30px;
+    min-width: 11%;
+    min-height: 27px;
+
+    width: 20px;
+    height: 20px;
+    background: white;
+    border: 1px solid white;
+    color:gray;
+    margin: 0;
+    border-radius: 50%;
+}
+#projectList button:first-of-type {
+    margin-left:10px;
+}
+
+button:hover {
+    /*background: #fff;
+    color: black;
+    border: 1px solid black;
+    background: #e9ff50;
+    color: black;
+    border: 1px solid #bce32c;*/
+    background: #5bffff;
+    color: black;
+    border: none;
+    box-shadow: 0px 0px 4px antiquewhite;
+}
+#projectList button:hover {
+    /*background: black;
+    border: 1px solid black;
+    color:white;*/
+
+    background-color: #e9ff50;
+    color: black;
+    border: 1px solid #bce32c;
+    background-color: #204e55;
+    color: black;
+    border: 1px solid #204e55;
+
+    background-color: #e9ff50;
+    color: black;
+    border: 1px solid #bce32c;
+    /*
+    background-color: #e9ff50;
+    color: black;
+    border: 1px solid #bce32c;*/
+}
+button i {
+    font-size: 48px;
+}
+#projectList button i {
+    font-size: 14.5px;
+/*    width:100%;
+    height: 100%;*/
+} 
+#taskList button i {
+    color:#0000004f;
+}
+#taskList button:hover i {
+    color:black;
+}
+
+#taskList .project span{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+button.editTaskButton {
+    max-width: 19%;
+    max-height: 72px;
+    min-width: 19%;
+    min-height: 74px;
+   
+    margin: 0 0 0 4px;  
+    padding: 0 0 3px 6px;
+}
+button.removeTaskButton {
+    background: cadetblue;
+    border:1px solid cadetblue;
+    width: 40%;
+}
+button:hover.removeTaskButton,
+#projectList button:hover.removeProjectButton {
+    background: red;
+    border:1px solid beige;
+}
+#projectList button:hover.removeProjectButton {
+    border:1px solid red;
+    box-shadow: none;
+}
+#taskFolder {
+    font-size: 24px;
+    margin:auto;
+    text-align: center;
+}
+#taskFolder h2 {
+    color: #ffffffa1;
+    font-size: 2.4em;
 }
 /* TO DO LIST CREATE NEW*/
 #createNewSection {
@@ -85,20 +213,44 @@ li{
 #createNewProject,
 #createNewTask{
     width: 100%;
-    background:rgba(206,97,116,.38);
+    background:rgba(178, 255, 85, 0.38);
     margin: auto;
     padding: 20px;
-    display: none;
 }
-#createNewProject.display,
-#createNewTask.display {
-    display: block;
+#createNewTask .id,
+#createNewProject .id {
+    height: .01px;
+    visibility: hidden;
+    width: .01px;
+    position: absolute;
 }
 #dynamicContent {
     flex: 1;
     width:100%;
 }
-
+#taskList {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+.card {
+    background: white;
+     height: max-content;
+    padding: 20px;
+    width:38%;
+    margin:1%;
+}
+.card div {
+    margin: 1%;
+}
+.tasks {
+    text-align: center;
+    margin: 2% auto;
+}
+.tasks span {
+    text-decoration:underline;
+    cursor: pointer;
+}
 .form-title {
     text-align: center;
     font-weight: 900;
@@ -111,7 +263,7 @@ form {
     width: 350px;
     margin: auto;
     padding: 20px;
-    background: #ce6174;
+    background: #d1df71;
 }
 label {
     width:100%;
@@ -157,42 +309,107 @@ select {
     flex-flow: row wrap;
     justify-content: space-between;
 }
-button {
-    width: 48%;
-    height: 39px;
-    border: none;
-    margin:3% 0; 
-    background: black;
-    border: 1px solid white;
-    color:white;
+form button {
+   /* width: 56%;
+    height: 39px;*/
+    width: 25%;
+    height: 81px;
 }
-#projectList button {
-    width: auto;
-    height: 30px;
-    border: none;
-    margin: 0;
-    padding: 0px 20px;
-}
-#projectList li {
-    cursor: pointer;
-}
-button:hover {
- background-color: #fff;
-  color: black;
-  border: 1px solid black;
-}
-
-.tasks {
-    text-align: center;
-    margin: 2% auto;
-}
-.hide {display:none;}
 .close {
     font-size: 1.8em;
     float: right;
     margin: 0 0 10px auto;
     cursor: pointer;
 }
+
+[data-form-visible="no"],
+[data-visible="no"] {
+  display:none !important;
+}
+[data-form-visible="yes"],
+[data-visible="yes"],
+#taskList .details[data-visible="yes"]  {
+  display:block;
+}
+ 
+#taskList [data-visible="yes"] {
+  display:flex;
+}
+.fa, .far, fas {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.checkbox-container {
+  display: block;
+  position: relative;
+    padding: 4px 0 0 28px;
+    margin: 3px auto auto 69px;
+  cursor: pointer;
+  font-size: 18px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.checkbox-container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkbox-container input:checked ~ .checkmark {
+  background-color: #331515;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.checkbox-container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+
 /* this is the decorative animated background */
 .context {
     width: 100%;
@@ -209,7 +426,7 @@ button:hover {
 
 
 .area{
-    background: pink;  
+    background: #754c53;
     background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);  
     width: 100%;
     height:200vh;

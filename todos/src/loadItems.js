@@ -12,7 +12,7 @@ let loadItems = (() => {
          if(localStorage.getItem('projectFolder', projectFolder)) {
             try {
                 projectFolder = JSON.parse(localStorage.getItem('projectFolder'));
-                console.log("did the get item from loaditems work?");
+                // console.log("did the get item from loaditems work?");
 
             } catch(e) {
                 localStorage.removeItem('projectFolder')
@@ -25,10 +25,10 @@ let loadItems = (() => {
         if(localStorage.getItem('taskFolder', taskFolder)) {
                 try {
                     taskFolder = JSON.parse(localStorage.getItem('taskFolder'));
-                    console.log("did the get item from loaditems work?");
+                    // console.log("did the get item from loaditems work?");
                 } catch(e) {
                     localStorage.removeItem('taskFolder');
-                    console.log("didit not work?");
+                    // console.log("didit not work?");
                 }
         } 
         return { taskFolder };
